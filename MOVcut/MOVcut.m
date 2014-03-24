@@ -25,8 +25,10 @@ function [support, conductance, flag, connected]=MOVcut(W,d,seed,gamma,c)
 %
 % see also GPPR sweep_cut NCP ACLcut
 
-% Lucas Jeub
-% jeub@maths.ox.ac.uk
+% Version:
+% Date:
+% Author:
+% Email:
 
 D=diag(d);
 

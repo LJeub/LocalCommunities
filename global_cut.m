@@ -1,5 +1,10 @@
 function [S,cond]=global_cut(A)
 
+% Version:
+% Date:
+% Author:
+% Email:
+
 [~,v]=laplace_eig(A);
 
 [cond,ind]=sweep_cut(v,A,sum(A,2),inf);

@@ -1,5 +1,11 @@
 function [lambda_2,V]=laplace_eig(A,tol,maxiter)
 % compute second-smallest eigenvalue of normalised Laplacian matrix
+
+% Version:
+% Date:
+% Author:
+% Email:
+
 if nargin<2
     tol=10^-6;
 end

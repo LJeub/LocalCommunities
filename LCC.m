@@ -9,8 +9,10 @@ function [ A_c,ind] = LCC(A )
 %       ind: node indeces of nodes in the largest connected component, i.e.
 %           A(ind,ind)=A_c
 
-% Lucas Jeub
-% jeub@maths.ox.ac.uk
+% Version:
+% Date:
+% Author:
+% Email:
 
 [C,sizes]=components(A);
 

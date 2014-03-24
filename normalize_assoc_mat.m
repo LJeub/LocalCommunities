@@ -9,8 +9,10 @@ function assoc_mat=normalize_assoc_mat(assoc_mat)
 %
 % see also NCP
 
-% Lucas Jeub
-% jeub@maths.ox.ac.uk
+% Version:
+% Date:
+% Author:
+% Email:
 
 n=length(assoc_mat);
 norm=repmat(diag(assoc_mat),1,n)+repmat(diag(assoc_mat)',n,1)-assoc_mat;

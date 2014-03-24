@@ -73,8 +73,10 @@ function [conductance_con, communities_con,conductance_dis,communities_dis,assoc
 %
 % see also ACLcut MOVcut normalize_assoc_mat
 
-% Lucas Jeub
-% jeub@maths.ox.ac.uk
+% Version:
+% Date:
+% Author:
+% Email:
 
 % Parse Options
 options=OptionStruct('nodes',length(W),'local',[],'alpha',[],'truncation',[],...

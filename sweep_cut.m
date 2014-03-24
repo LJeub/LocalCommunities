@@ -16,8 +16,10 @@ function [conductance,support,connected]=sweep_cut(p,W,d,max_vol)
 %   connected: logical vector with elements indicating whether the subgraph
 %       induced by the corresponding sweep set is connected
 
-% Lucas Jeub
-% jeub@maths.ox.ac.uk
+% Version:
+% Date:
+% Author:
+% Email:
 
 n=length(W);
 mm=sum(d);
