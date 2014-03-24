@@ -15,8 +15,12 @@ function [int_cond]=InternalConductance(W,S)
 %               communities. Internal conductance of empty communities is
 %               is coded nan.
 
-% Lucas Jeub
-% jeub@maths.ox.ac.uk
+% Version: 2.1
+% Date: Mon 24 Mar 2014 18:16:11 GMT
+% Author: 
+% Email: 
+
+
 
 if ~iscell(S)
     S={S};
