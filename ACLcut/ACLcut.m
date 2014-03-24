@@ -23,8 +23,10 @@ function [support, conductance, flag, connected]=ACLcut(W,d,seed,alpha,epsilon)
 %
 % see also APPR sweep_cut NCP MOVcut
 
-% Lucas Jeub
-% jeub@maths.ox.ac.uk
+% Version: 0.1-beta
+% Date: Mon 24 Mar 2014 21:39:53 GMT
+% Author: Lucas Jeub
+% Email: jeub@maths.ox.ac.uk
 
 %compute approximate pagerank vector for seed
 [p,flag]=APPR(alpha,epsilon,seed,W,d);

@@ -14,8 +14,10 @@ function [p,flag]=GPPR(gamma,s,W,d)
 %   p: A generalized personal pagerank vector
 %   flag: flag indicating convergence of bicgstab
 
-% Lucas Jeub
-% jeub@maths.ox.ac.uk
+% Version: 0.1-beta
+% Date: Mon 24 Mar 2014 21:39:53 GMT
+% Author: Lucas Jeub
+% Email: jeub@maths.ox.ac.uk
 
 D=sparse(diag(d)); %Construct diagonal matrix of degree sequence
 Lcomb=D-W; %Constructs Combinatorial Laplacian
