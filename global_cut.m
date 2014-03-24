@@ -1,9 +1,9 @@
 function [S,cond]=global_cut(A)
 
-% Version:
-% Date:
-% Author:
-% Email:
+% Version: 0.1-beta
+% Date: Mon 24 Mar 2014 21:39:53 GMT
+% Author: Lucas Jeub
+% Email: jeub@maths.ox.ac.uk
 
 [~,v]=laplace_eig(A);
 

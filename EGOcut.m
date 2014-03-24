@@ -1,10 +1,10 @@
 function [support, conductance, flag, connected]=EGOcut(W,d,seed,~,~)
 %
 
-% Version:
-% Date:
-% Author:
-% Email:
+% Version: 0.1-beta
+% Date: Mon 24 Mar 2014 21:39:53 GMT
+% Author: Lucas Jeub
+% Email: jeub@maths.ox.ac.uk
 
 % use inverse weight as distance
 D=W;
