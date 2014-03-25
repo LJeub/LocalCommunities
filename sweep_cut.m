@@ -18,8 +18,8 @@ function [conductance,support,connected]=sweep_cut(p,W,d,max_vol)
 %
 % see also ACLcut MOVcut EGOcut global_cut
 
-% Version: 1.0
-% Date: Tue 25 Mar 2014 16:10:50 GMT
+% Version: 1.01
+% Date: Tue 25 Mar 2014 17:22:33 GMT
 % Author: Lucas G. S. Jeub
 % Email: jeub@maths.ox.ac.uk
 

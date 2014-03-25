@@ -16,8 +16,8 @@ function [ A_c,ind] = LCC(A )
 %
 % see also components
 
-% Version: 1.0
-% Date: Tue 25 Mar 2014 16:10:49 GMT
+% Version: 1.01
+% Date: Tue 25 Mar 2014 17:22:32 GMT
 % Author: Lucas G. S. Jeub
 % Email: jeub@maths.ox.ac.uk
 
