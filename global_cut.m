@@ -1,8 +1,21 @@
 function [S,cond]=global_cut(A)
+%[S,cond]=global_cut(A)
+%
+% global_cut: approximate the globally minimal conductance
+%   cut
+%
+% Input:
+%   A: adjacency matrix
+%
+% Outputs:
+%   S: indicates bipartition found (entries are 1 or 2,
+%       indicating which part of the partition the corresponding
+%       node belongs to)
+%   cond: the conductance value of the bipartition
 
-% Version: 0.1-beta
-% Date: Mon 24 Mar 2014 21:39:53 GMT
-% Author: Lucas Jeub
+% Version: 1.0
+% Date: Tue 25 Mar 2014 16:10:49 GMT
+% Author: Lucas G. S. Jeub
 % Email: jeub@maths.ox.ac.uk
 
 [~,v]=laplace_eig(A);

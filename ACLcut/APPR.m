@@ -1,6 +1,7 @@
 function [p,not_converged,r]=APPR(alpha,epsilon,v,W,d)
-
-% [p,flag,r]=APPR(alpha,s,A) computes the personalized pagerank vector
+% [p,not_converged,r]=APPR(alpha,s,A)
+%
+% APPR: computes the personalized pagerank vector
 % 
 % Implements the ApproximatePR algrotihm from:
 %   Andersen, R., Chung, F. R. K., & Lang, K. J. (2006).
@@ -9,9 +10,11 @@ function [p,not_converged,r]=APPR(alpha,epsilon,v,W,d)
 %
 % Input:
 % 
-%   alpha: teleportation probability between 0 and 1
+%   alpha: teleportation parameter between 0 and 1
+%   epsilon: truncation parameter
 %   v: seed node
-%   A: symmetric adjacency matrix
+%   W: adjacency matrix
+%   d: vector of node strengths
 %
 % Output:
 %
@@ -21,9 +24,9 @@ function [p,not_converged,r]=APPR(alpha,epsilon,v,W,d)
 %
 % see also ACLcut
 
-% Version: 0.1-beta
-% Date: Mon 24 Mar 2014 21:39:53 GMT
-% Author: Lucas Jeub
+% Version: 1.0
+% Date: Tue 25 Mar 2014 16:10:49 GMT
+% Author: Lucas G. S. Jeub
 % Email: jeub@maths.ox.ac.uk
 
 maxiter=10^6;

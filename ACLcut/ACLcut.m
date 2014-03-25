@@ -1,19 +1,18 @@
 function [support, conductance, flag, connected]=ACLcut(W,d,seed,alpha,epsilon)
-
 % [support,conductance,volume]=ACLcut(W,d,seed,alpha,epsilon)
 %
-%   implements the ACLcut truncated pagerank diffusion method to find small
+% ACLcut: implements the ACLcut truncated pagerank diffusion method to find small
 %   conductance cuts around a seed vertex
 %   
-% Input:
+% Inputs:
 %   
 %   W: adjacency matrix
 %   d: vector of node strength
-%   seed: nodes of interest
+%   seed: seed node
 %   alpha: value of teleportation probability
-%   epsilon: thresholding value in APPR vector
+%   epsilon: truncation parameter for APPR vector
 %
-% Output:
+% Outputs:
 %
 %   support: nodes in support of APPR vector in sweep cut ordering
 %   conductance: vector of conductance values for each sweep set
@@ -23,9 +22,9 @@ function [support, conductance, flag, connected]=ACLcut(W,d,seed,alpha,epsilon)
 %
 % see also APPR sweep_cut NCP MOVcut
 
-% Version: 0.1-beta
-% Date: Mon 24 Mar 2014 21:39:53 GMT
-% Author: Lucas Jeub
+% Version: 1.0
+% Date: Tue 25 Mar 2014 16:10:49 GMT
+% Author: Lucas G. S. Jeub
 % Email: jeub@maths.ox.ac.uk
 
 %compute approximate pagerank vector for seed
