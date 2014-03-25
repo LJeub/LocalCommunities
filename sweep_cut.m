@@ -1,7 +1,7 @@
 function [conductance,support,connected]=sweep_cut(p,W,d,max_vol)
 % [conductance,support,connected]=sweep_cut(p,W,d,max_vol)
 % 
-% computes a sweep cut for ranking vector p and adjacency matrix W with
+% sweep_cut: computes a sweep cut for ranking vector p and adjacency matrix W with
 % node strengths d. Optionally specify max_vol to restrict the maximum
 % volume of sweep sets.
 %
@@ -15,6 +15,8 @@ function [conductance,support,connected]=sweep_cut(p,W,d,max_vol)
 %       by support(1:k) has conductance given by conductance(k)
 %   connected: logical vector with elements indicating whether the subgraph
 %       induced by the corresponding sweep set is connected
+%
+% see also ACLcut MOVcut EGOcut global_cut
 
 % Version: 0.1-beta
 % Date: Mon 24 Mar 2014 21:39:53 GMT

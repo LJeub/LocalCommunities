@@ -1,7 +1,7 @@
 function [int_cond]=InternalConductance(W,S)
-% InternalConductance: Compute internal conductance of communities
-%
 % [int_cond]=InternalConductance(W,S)
+%
+% InternalConductance: Compute internal conductance of communities
 %
 % Inputs:
 %           W: adjacnecy matrix

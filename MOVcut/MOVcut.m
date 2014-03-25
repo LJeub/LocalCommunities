@@ -1,8 +1,7 @@
 function [support, conductance, flag, connected]=MOVcut(W,d,seed,gamma,c)
-
 % [support, conductance, flag, connected]=MOVcut(W,d,seed,gamma,c)
 %
-% implements the MOVcut locally biased spectral optimisation to find low
+% MOVcut: implements the MOVcut locally biased spectral optimisation to find low
 % conductance cuts around a seed vertex, see:
 %   Mahoney, M. W., Orecchia, L., & Vishnoi, N. K. (2012). 
 %   A local spectral method for graphs: With applications to improving graph
@@ -14,11 +13,12 @@ function [support, conductance, flag, connected]=MOVcut(W,d,seed,gamma,c)
 %   d: vector of node strength
 %   seed: nodes of interest
 %   gamma: value of teleportation parameter
-%   c: volume factor
+%   c: volume factor (if c is not specified, support is only over
+%       positive values of the GPPR vector)
 %
 % Output:
 %
-%   support: nodes in support of GPPR vector in sweep cut ordering
+%   support: nodes  in sweep cut ordering
 %   conductance: vector of conductance values for each sweep set
 %   flag: convergence flag
 %   connected: identifies connected sweep sets

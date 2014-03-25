@@ -1,5 +1,26 @@
 function [lambda_2,V]=laplace_eig(A,tol,maxiter)
-% compute second-smallest eigenvalue of normalised Laplacian matrix
+% [lambda_2,V]=laplace_eig(A,tol,maxiter)
+%
+% laplace_eig: compute second-smallest eigenvalue and corresponding
+%       eigenvector of normalized Laplacian matrix
+%
+% Inputs: 
+%   A: adjacency matrix
+%   tol: error tollerance for the computation
+%   maxiter: maximum number of iterations for the computation
+%
+% Outputs:
+%   lambda_2: second-smallest eigenvalue of the normalized 
+%       Laplacian matrix of A
+%   V: corresponding eigenvector
+%
+% This function relies on the lobpcg method:
+%   A. V. Knyazev, Toward the Optimal Preconditioned Eigensolver:
+%   Locally Optimal Block Preconditioned Conjugate Gradient Method,
+%   SIAM Journal on Scientific Computing 23 (2001), no. 2, pp. 517-541. 
+%   http://dx.doi.org/10.1137/S1064827500366124
+%
+% see also lobpcg
 
 % Version: 0.1-beta
 % Date: Mon 24 Mar 2014 21:39:53 GMT

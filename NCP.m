@@ -1,8 +1,15 @@
-function [conductance_con, communities_con,conductance_dis,communities_dis,assoc_mat]=NCP(W,cut_function,varargin)
+function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_mat]=NCP(W,cut_function,varargin)
+% [conductance_con,communities_con,conductance_dis,communities_dis,assoc_mat]=NCP(W,cut_function,options)
+%
 % NCP:  Compute the Network Community Profile for a network
 %
-% [conductance_con, communities_con, conductance_dis, communities_dis,
-% assoc_mat] = NCP(W, cut_function, options)
+% This function (with the appropriate options listed below) can be used
+% to compute approximate local and global NCPs for a network using any
+% of the three methods in:
+% Jeub, L. G. S., Balachandran, P., Porter, M. A., Mucha, P. J., 
+% & Mahoney, M. W. (2014).
+% Think Locally, Act Locally: The Detection of Small, Medium-Sized, and 
+% Large Communities in Large Networks. arXiv:1403.3795 [cs.SI]
 %
 % Inputs:
 %           W: adjacency matrix

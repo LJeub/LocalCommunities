@@ -1,7 +1,9 @@
 function [p,flag]=GPPR(gamma,s,W,d)
 % [p,flag]=GPPR(gamma,s,W)
 %
-% Input:
+% GPPR: compute a Generalized Personalized Page Rank vector
+%
+% Inputs:
 %
 %   gamma: a number between (-infty, lambda_2(G)) where lambda_2(G) is the
 %       second smallest eigenvalue of the normalized Laplacian
@@ -9,7 +11,7 @@ function [p,flag]=GPPR(gamma,s,W,d)
 %   W: Adjacency matrix for G
 %   d: vector of node strengths
 %
-% Output:
+% Outputs:
 %
 %   p: A generalized personal pagerank vector
 %   flag: flag indicating convergence of bicgstab
