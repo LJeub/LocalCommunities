@@ -55,10 +55,14 @@ if length(L)<50
     lambda_2=lambda_2(2);
     V=V(:,s(2));
 else
-    
-    R=ichol(L);
-    RT=R';
-    precfun = @(x)RT\(R\x);
+    try
+        R=ichol(L);
+        RT=R';
+        precfun = @(x)RT\(R\x);
+    catch er
+        warning('Incomplete Cholesky factorisation failed')
+        precfun = @(x) x;
+    end
     
     in2=rand(length(A),1);
     [V,lambda_2,flag]=lobpcg(in2,L,[],precfun,tol,maxiter,0,d);
