@@ -118,7 +118,7 @@ if options.isset('local')
         node_sampler=@() local(randperm(length(local)));
     end
 else
-    node_sampler=randsample(length(W),N,false);
+    node_sampler=@() randsample(1:length(W),N,false);
 end
 
 min_viscount=options.viscount;
