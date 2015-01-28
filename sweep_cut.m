@@ -66,7 +66,7 @@ else
         indexcomp(support(i))=false;
         
         %compute change in conductance by adding node index(i)
-        E(i)=E_p-sum(sum(W(support(1:i-1),support(i))))+sum(sum(W(indexcomp,support(i))));
+        E(i)=E_p-sum(sum(W(support(i)),support(1:i-1)))+sum(sum(W(indexcomp,support(i))));
         E_p=E(i);
        
          %store conductance values
