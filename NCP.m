@@ -87,20 +87,11 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 
 % Parse Options
 options=OptionStruct('nodes',length(W),'local',[],'alpha',[],'truncation',[],...
-    'viscount',10); %set defaults
+    'viscount',10,'transition_matrix',false); %set defaults
 options.set(varargin); %set given options
 
 % check W is symmetric, connected, no self-edges (otherwise fix)
 W=sparse(W);
-if ~isequal(W,W')
-    warning('symmetrised adjacency matrix')
-    W=(W+W')/2;
-end
-
-if sum(diag(W))
-    warning('removed self-edges')
-    W=W-diag(diag(W));
-end
 
 [WC,ind]=LCC(W);
 N=options.nodes;
@@ -110,6 +101,36 @@ if length(WC)~=length(W)
     N=min(N,length(WC));
 end
 clear('WC');
+
+if ~options.transition_matrix
+    if sum(diag(W))
+        warning('removed self-edges')
+        W=W-diag(diag(W));
+    end
+    P=W./repmat(sum(W,1),size(W,1),1);
+else
+    P=W;
+end
+
+if ~isequal(W,W')
+    [d,eigval]=eigs(P,1);
+    if norm(eigval-1)>10*eps
+        error('largest eigenvalue of transition matrix not equal to 1')
+    end
+    d=d/sum(d);
+else
+    d=sum(W,2);
+    d=d/sum(d);
+end
+
+
+%renormalized network
+%if options.transition_matrix
+    W=P.*repmat(d(:)',size(W,1),1);
+%end
+
+
+
 if options.isset('local')
     local=options.local;
     if length(local)>N
@@ -122,7 +143,7 @@ else
 end
 
 min_viscount=options.viscount;
-d=sum(W,2);
+
 
 switch cut_function
     
