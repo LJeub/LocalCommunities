@@ -6,9 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		59441B761A7AE07A00E134EC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59441B741A7AE07A00E134EC /* main.cpp */; };
+		59441B7B1A7AE0B200E134EC /* full.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59441B781A7AE0B200E134EC /* full.cpp */; };
+		59441B7C1A7AE0B200E134EC /* sparse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59441B7A1A7AE0B200E134EC /* sparse.cpp */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		59441B6B1A7AE04600E134EC /* APPR.mexmaci64 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = APPR.mexmaci64; sourceTree = BUILT_PRODUCTS_DIR; };
 		59441B6E1A7AE04600E134EC /* mex.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = mex.xcconfig; sourceTree = "<group>"; };
+		59441B741A7AE07A00E134EC /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		59441B751A7AE07A00E134EC /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		59441B781A7AE0B200E134EC /* full.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = full.cpp; sourceTree = "<group>"; };
+		59441B791A7AE0B200E134EC /* matlab_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matlab_matrix.h; sourceTree = "<group>"; };
+		59441B7A1A7AE0B200E134EC /* sparse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sparse.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -32,8 +43,21 @@
 			isa = PBXGroup;
 			children = (
 				59441B6E1A7AE04600E134EC /* mex.xcconfig */,
+				59441B741A7AE07A00E134EC /* main.cpp */,
+				59441B751A7AE07A00E134EC /* main.h */,
+				59441B771A7AE0B200E134EC /* matlab_matrix */,
 			);
 			path = APPR;
+			sourceTree = "<group>";
+		};
+		59441B771A7AE0B200E134EC /* matlab_matrix */ = {
+			isa = PBXGroup;
+			children = (
+				59441B781A7AE0B200E134EC /* full.cpp */,
+				59441B791A7AE0B200E134EC /* matlab_matrix.h */,
+				59441B7A1A7AE0B200E134EC /* sparse.cpp */,
+			);
+			path = matlab_matrix;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -89,6 +113,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59441B7B1A7AE0B200E134EC /* full.cpp in Sources */,
+				59441B761A7AE07A00E134EC /* main.cpp in Sources */,
+				59441B7C1A7AE0B200E134EC /* sparse.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,8 +168,10 @@
 				DYLIB_COMPATIBILITY_VERSION = "";
 				DYLIB_CURRENT_VERSION = "";
 				EXECUTABLE_EXTENSION = mexmaci64;
+				GCC_OPTIMIZATION_LEVEL = fastest;
 				HEADER_SEARCH_PATHS = "$(MATLABROOT)/extern/include";
 				LIBRARY_SEARCH_PATHS = "$(MATLABROOT)/bin/maci64";
+				LLVM_LTO = YES;
 				MACH_O_TYPE = mh_bundle;
 				OTHER_LDFLAGS = (
 					"-lmx",
@@ -173,6 +202,7 @@
 				59441B731A7AE04600E134EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
