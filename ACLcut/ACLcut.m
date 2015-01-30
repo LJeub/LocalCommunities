@@ -28,7 +28,10 @@ function [support, conductance, flag, connected]=ACLcut(W,d,seed,alpha,epsilon)
 % Email: jeub@maths.ox.ac.uk
 
 %compute approximate pagerank vector for seed
-[p,flag]=APPR(alpha,epsilon,seed,W,d);
+%[p,flag]=APPR_nomex(alpha,epsilon,seed,W,d);
+r=zeros(size(d));
+r(seed)=1;
+[p,flag]=APPR(alpha,epsilon,r,W,d);
 
 %Compute normalized sweep vector
 p=p(:)./d(:);
