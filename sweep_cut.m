@@ -41,6 +41,9 @@ if isempty(supp)
     supp=n-1;
 end
 
+supp=min(supp,ceil(n/2));
+
+
 if supp==0
     conductance=nan;
     support=[];
@@ -48,46 +51,47 @@ if supp==0
 else
     
     %logical indeces of nodes not in community
-    indexcomp=true(n,1); 
+    %indexcomp=true(n,1); 
     
-    E=zeros(1,supp);
-    E_p=0;
+    E=0;
     i=1;
     Volsc=mm-d(support(1));
     Vols=d(support(1));
     conductance=ones(1,supp);
     connected=false(1,supp);
     
-    components=zeros(size(W,1),1);
+    if nargout>2
+        components=zeros(supp,1);
+        WS=W(support(1:supp),support(1:supp));
+    end
     
     num_comp=0;
     while i<=supp && Vols<=max_vol
    
-        indexcomp(support(i))=false;
+        %indexcomp(support(i))=false;
         
         %compute change in conductance by adding node index(i)
-        E(i)=E_p-sum(sum(W(support(i)),support(1:i-1)))+sum(sum(W(indexcomp,support(i))));
-        E_p=E(i);
+        E=E-sum(sum(W(support(i),support(1:i-1))))+sum(sum(W(support(i+1:end),support(i))));
+
        
          %store conductance values
-        conductance(i)=E(i)/min(Volsc,Vols);
+        conductance(i)=E/min(Volsc,Vols);
 		% cond(i)=mm*E(i)/(Volsc*Vols);
         
         % check if sweepset is connected
         if nargout>2
-            n_comp=components(W(:,support(i))~=0);
-            n_comp=n_comp(n_comp>0);
-            
-            if isempty(n_comp)
-                components(support(i))=num_comp+1;
+            merge=unique_fast([components(WS(1:i-1,i)~=0);components(WS(i,1:i-1)~=0)]);
+           
+            if isempty(merge)
+                components(i)=num_comp+1;
                 num_comp=num_comp+1;
             else
-                merge=unique(n_comp);
-                components(support(i))=merge(1);
+                %merge=unique(merge);
+                components(i)=merge(1);
                 if length(merge)>1
                     no_merge=true(num_comp,1);
                     no_merge(merge)=false;
-                    ind=support(1:i);
+                    ind=1:i;
                     C=sparse(1:i,components(ind),true);
                     Cn=[C(:,no_merge),any(C(:,merge),2)];
                     num_comp=size(Cn,2);
