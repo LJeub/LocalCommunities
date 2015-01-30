@@ -114,7 +114,7 @@ end
 
 if ~isequal(W,W')
     [d,eigval]=eigs(P,1);
-    if norm(eigval-1)>10*eps
+    if norm(eigval-1)>10^-10
         error('largest eigenvalue of transition matrix not equal to 1')
     end
     d=d/sum(d);
