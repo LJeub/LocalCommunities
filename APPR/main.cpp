@@ -41,7 +41,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]){
     
     
     for (mwIndex i=0; i<N; ++i) {
-        if (r.get(i)>=epsilon*d.get(i)) {
+        if (r.get(i)>epsilon*d.get(i)) {
             update.push(i);
         }
     }
@@ -66,11 +66,11 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]){
 void push(full & p, full & r, const full & d, const sparse & W, queue<mwIndex> & update, double alpha, double epsilon) {
     mwIndex node=update.front();
     update.pop();
-    if (r.get(node)>=epsilon*d.get(node)) {
+    if (r.get(node)>epsilon*d.get(node)) {
         double r_node=r.get(node);
         p.get(node)+= alpha*r_node; //push to p
         r.get(node)=(1-alpha)*r_node/2;
-        if (r.get(node)>=epsilon*d.get(node)) {
+        if (r.get(node)>epsilon*d.get(node)) {
             update.push(node);
         }
         
@@ -78,7 +78,7 @@ void push(full & p, full & r, const full & d, const sparse & W, queue<mwIndex> &
             mwIndex target = W.row[i];
             double delta = (1-alpha)*r_node*W.val[i]/(2*d.get(node));
             r.get(target)+=delta;
-            if (0<=r.get(target)-epsilon*d.get(target) && r.get(target)-epsilon*d.get(target)<delta) {
+            if (0<r.get(target)-epsilon*d.get(target) && r.get(target)-epsilon*d.get(target)<=delta) {
                 update.push(target);
             }
         }
