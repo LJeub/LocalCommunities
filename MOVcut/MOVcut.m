@@ -47,5 +47,5 @@ if nargin>4
     [conductance,support,connected]=sweep_cut(p,W,d,max_vol);
     
 else
-    [conductance,support,connected]=sweep_cut(p,W,d);
+    [conductance,support,connected]=sweep_cut(p,W,d,0.5*sum(d));
 end
