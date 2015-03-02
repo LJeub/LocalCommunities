@@ -29,19 +29,20 @@ mm=sum(d);
 [ps,support]=sort(p,'Descend');
 
 if nargin<4
+    max_vol=inf;
+end
 %support
-supp=find(ps<=0,1,'first')-1;
-max_vol=inf;
+
+if ps(end)>=0
+    supp=find(ps<=0,1,'first')-1;
 else
-supp=n-1;
+    supp=n-1;
 end
 
 
 if isempty(supp)
     supp=n-1;
 end
-
-supp=min(supp,ceil(n/2));
 
 
 if supp==0
@@ -76,6 +77,11 @@ else
        
          %store conductance values
         conductance(i)=E/min(Volsc,Vols);
+        if conductance(i)<0
+            warning('negative conductance value encountered (surface area: %f, volume: %f)',E,min(Volsc,Vols));
+            conductance(i)=nan;
+            break
+        end
 		% cond(i)=mm*E(i)/(Volsc*Vols);
         
         % check if sweepset is connected
@@ -104,8 +110,9 @@ else
         end
         
 		%compute change in volumes
-         Volsc=Volsc-d(support(i+1));
+         %Volsc=Volsc-d(support(i+1));
          Vols=Vols+d(support(i+1));
+         Volsc=mm-Vols;
          i=i+1;
     end
     support=support(1:i-1);
