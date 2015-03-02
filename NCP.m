@@ -87,22 +87,27 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 
 % Parse Options
 options=OptionStruct('nodes',length(W),'local',[],'alpha',[],'truncation',[],...
-    'viscount',10,'transition_matrix',false); %set defaults
+    'viscount',10,'transitionmatrix',false,'stationarydistribution',[]); %set defaults
 options.set(varargin); %set given options
 
 % check W is symmetric, connected, no self-edges (otherwise fix)
 W=sparse(W);
-
-[WC,ind]=LCC(W);
 N=options.nodes;
-if length(WC)~=length(W)
-    warning('considering only largest connnected component');
-    W=WC;
-    N=min(N,length(WC));
-end
-clear('WC');
 
-if ~options.transition_matrix
+if ~options.isset('stationarydistribution')
+    [WC,original_node_index]=LCC(W);
+    
+    if length(WC)~=length(W)
+        warning('considering only largest connnected component');
+        W=WC;
+        N=min(N,length(WC));
+    end
+    clear('WC');
+else
+    original_node_index=1:length(W);
+end
+
+if ~options.transitionmatrix
     if sum(diag(W))
         warning('removed self-edges')
         W=W-diag(diag(W));
@@ -112,29 +117,45 @@ else
     P=W;
 end
 
-if ~isequal(W,W')
-    [d,eigval]=eigs(P,1);
-    if norm(eigval-1)>10^-10
-        error('largest eigenvalue of transition matrix not equal to 1')
+if ~options.isset('stationarydistribution')
+    if ~isequal(W,W')
+        [d,eigval]=eigs(P,1);
+        if norm(eigval-1)>10^-10
+            error('largest eigenvalue of transition matrix not equal to 1')
+        end
+        d=d/sum(d);
+        if min(d)<-10^-10
+            error('stationary distribution of random walk has negative values');
+        end
+        d=min(max(d,0),1); %clean numerical error
+    else
+        d=sum(W,2);
+        d=d/sum(d);
     end
-    d=d/sum(d);
 else
-    d=sum(W,2);
-    d=d/sum(d);
+    d=options.stationarydistribution(:)';
 end
 
 
 %renormalized network
-%if options.transition_matrix
+%if options.transitionmatrix
     W=P.*repmat(d(:)',size(W,1),1);
 %end
 
 
 
 if options.isset('local')
-    local=options.local;
+    local=options.local; 
+    %reindex to LCC
+    if iscell(local)
+        for i=1:length(local)
+            local{i}=find(ismember(original_node_index,local{i}));
+        end
+    else
+        local=find(ismember(original_node_index,local));
+    end
     if length(local)>N
-        node_sampler=@() randsample(local,N,false);
+        node_sampler=@() local(randsample(1:length(local),N,false));
     else
         node_sampler=@() local(randperm(length(local)));
     end
@@ -271,7 +292,7 @@ for j=1:length(alpha)
                     conductance_con(update)=cond(update);
                     if argout>1
                         for l=update(:)'
-                            communities_con{l}=supp(1:l);
+                            communities_con{l}=original_node_index(supp(1:l));
                         end
                     end
                     
@@ -280,7 +301,7 @@ for j=1:length(alpha)
                         conductance_dis(update_dis)=cond(update_dis);
                         if argout>3
                             for l=update(:)'
-                                communities_dis{l}=supp(1:l);
+                                communities_dis{l}=original_node_index(supp(1:l));
                             end
                         end
                     end
@@ -295,7 +316,7 @@ for j=1:length(alpha)
             else
                 [supp,cond,flag,connected]=f_handle(W,d,nodes(i),alpha(j),truncation(k));
                 if flag
-                    warning('maximum number of iterations reached while computing pagerank \n skipping to next parameter value')
+                    warning('maximum number of iterations reached while computing pagerank, skipping to next parameter value')
                     break
                 end
                 if ~isempty(supp)
@@ -308,7 +329,7 @@ for j=1:length(alpha)
                 conductance_con(update)=cond(update);
                 if argout>1
                     for l=update(:)'
-                        communities_con{l}=supp(1:l);
+                        communities_con{l}=original_node_index(supp(1:l));
                     end
                 end
                 
@@ -317,7 +338,7 @@ for j=1:length(alpha)
                     conductance_dis(update_dis)=cond(update_dis);
                     if argout>3
                         for l=update(:)'
-                            communities_dis{l}=supp(1:l);
+                            communities_dis{l}=original_node_index(supp(1:l));
                         end
                     end
                 end
