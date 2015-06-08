@@ -71,6 +71,10 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 %           viscount [10]: minimum number of times each node needs to be in
 %               the best community before the sampling is stopped.
 %
+%           aggresive: [false]: if set to `true`, a node that has
+%               been in the best community more than `viscount` times is
+%               never used as a seed node.
+%
 % For example, to compute an NCP for a network with adjacency matrix W
 % using the ACLcut method with alpha=0.01, one would call the function as
 %   conductance=NCP(W,'ACL','alpha',0.01);
@@ -87,12 +91,14 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 
 % Parse Options
 options=OptionStruct('nodes',length(W),'local',[],'alpha',[],'truncation',[],...
-    'viscount',10,'transitionmatrix',false,'stationarydistribution',[]); %set defaults
+    'viscount',10,'aggresive',false,'transitionmatrix',false,'stationarydistribution',[]); %set defaults
 options.set(varargin); %set given options
 
-% check W is symmetric, connected, no self-edges (otherwise fix)
+% check W is connected, no self-edges (otherwise fix)
 W=sparse(W);
 N=options.nodes;
+
+aggresive=options.aggresive;
 
 if ~options.isset('stationarydistribution')
     [WC,original_node_index]=LCC(W);
@@ -215,13 +221,14 @@ end
 %chunking for parallelisationn (try matlabpool to get size (fails if
 %parallel toolbox is not installed))
 try
-    pool_size=matlabpool('size');
+    pool=gcp;
+    pool_size=pool.NumWorkers;
     if pool_size==0
         chunk=1;
         parallel=false;
     else
         parallel=true;
-        chunk=pool_size*10;
+        chunk=pool_size;
     end
 catch
     chunk=1;
@@ -257,7 +264,7 @@ for j=1:length(alpha)
         nodes=node_sampler();
         while min(visitcount)<min_viscount&&i<=length(nodes)
             if parallel
-                loopsize=min(chunk-1,N-i);
+                loopsize=min(chunk-1,length(nodes)-i);
                 loopnodes=nodes(i:i+loopsize);
                 alphal=alpha(j);
                 truncl=truncation(k);
@@ -351,9 +358,15 @@ for j=1:length(alpha)
                 
                 i=i+1;
             end
-            if min(visitcount)>=min_viscount
-                disp(['min_viscount reached with ',num2str(min(visitcount)),' visits after ',num2str(i),' iterations']);
+            
+            if aggresive
+                remove=find(visitcount(nodes(i:end))>=min_viscount);
+                nodes((i-1)+remove)=[];
             end
         end
+        if min(visitcount)>=min_viscount
+                disp(['min_viscount reached with ',num2str(min(visitcount)),' visits after ',num2str(i),' iterations']);
+        end
+        fprintf('sampled %u nodes\n',length(nodes));
     end
 end
