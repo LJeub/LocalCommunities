@@ -29,7 +29,7 @@ function [support, conductance, flag, connected]=ACLcut(W,d,seed,alpha,epsilon,m
 % Email: jeub@maths.ox.ac.uk
 
 
-% no volume restriction by default
+% Up to half the volume of the network by default
 if nargin<6
     max_vol=0.5*sum(d);
 end
