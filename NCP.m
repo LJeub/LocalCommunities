@@ -71,7 +71,7 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 %           viscount [10]: minimum number of times each node needs to be in
 %               the best community before the sampling is stopped.
 %
-%           aggresive: [false]: if set to `true`, a node that has
+%           aggressive: [false]: if set to `true`, a node that has
 %               been in the best community more than `viscount` times is
 %               never used as a seed node.
 %
@@ -91,14 +91,14 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 
 % Parse Options
 options=OptionStruct('nodes',length(W),'local',[],'alpha',[],'truncation',[],...
-    'viscount',10,'aggresive',false,'transitionmatrix',false,'stationarydistribution',[]); %set defaults
+    'viscount',10,'aggressive',false,'transitionmatrix',false,'stationarydistribution',[]); %set defaults
 options.set(varargin); %set given options
 
 % check W is connected, no self-edges (otherwise fix)
 W=sparse(W);
 N=options.nodes;
 
-aggresive=options.aggresive;
+aggressive=options.aggressive;
 
 if ~options.isset('stationarydistribution')
     [WC,original_node_index]=LCC(W);
@@ -359,7 +359,7 @@ for j=1:length(alpha)
                 i=i+1;
             end
             
-            if aggresive
+            if aggressive
                 remove=find(visitcount(nodes(i:end))>=min_viscount);
                 nodes((i-1)+remove)=[];
             end
