@@ -133,10 +133,10 @@ if ~options.transitionmatrix
     end
     k=sum(W,1);
     [row,col,val]=find(W);
-    for i=1:length(k)
+    
         %P=W./repmat(sum(W,1),size(W,1),1);
-        P=sparse(row,col,val./k(col));
-    end
+        P=sparse(row,col,val./k(col)');
+
 else
     P=W;
 end
