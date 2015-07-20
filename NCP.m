@@ -104,7 +104,7 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 
 % Parse Options
 options=OptionStruct('nodes',length(W),'local',[],'alpha',[],'truncation',[],...
-    'viscount',10,'aggressive',false,'transitionmatrix',false,'stationarydistribution',[]); %set defaults
+    'viscount',10,'aggressive',false,'transitionmatrix',false,'stationarydistribution',[],'teleportation',0.1); %set defaults
 options.set(varargin); %set given options
 
 % check W is connected, no self-edges (otherwise fix)
