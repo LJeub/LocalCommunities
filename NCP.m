@@ -75,6 +75,19 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 %               been in the best community more than `viscount` times is
 %               never used as a seed node.
 %
+%           teleportation: [0.1]: for directed networks use unrecorded link
+%               teleportations with teleportation parameter `teleportation`
+%               to estimate stationary distribution (unless
+%               `stationarydistribution` is given)
+%
+%           stationarydistribution: []: specify to use stationary
+%               distribution to estimate adjacency matrix based on
+%               unrecorded teleportations
+%
+%           transitionmatrix: [false]: if set to true, `A` is treated as a
+%               random walk transition matrix instead of an adjacency
+%               matrix
+%
 % For example, to compute an NCP for a network with adjacency matrix W
 % using the ACLcut method with alpha=0.01, one would call the function as
 %   conductance=NCP(W,'ACL','alpha',0.01);
@@ -118,18 +131,24 @@ if ~options.transitionmatrix
         warning('removed self-edges')
         W=W-diag(diag(W));
     end
-    P=W./repmat(sum(W,1),size(W,1),1);
+    k=sum(W,1);
+    [row,col,val]=find(W);
+    for i=1:length(k)
+        %P=W./repmat(sum(W,1),size(W,1),1);
+        P=sparse(row,col,val./k(col));
+    end
 else
     P=W;
 end
 
 if ~options.isset('stationarydistribution')
     if ~isequal(W,W')
-        [d,eigval]=eigs(P,1);
-        if norm(eigval-1)>10^-10
-            error('largest eigenvalue of transition matrix not equal to 1')
-        end
-        d=d/sum(d);
+          d=page_rank(P,options.teleportation,sum(W,2));
+%         [d,eigval]=eigs(P,1);
+%         if norm(eigval-1)>10^-10
+%             error('largest eigenvalue of transition matrix not equal to 1')
+%         end
+%         d=d/sum(d);
         if min(d)<-10^-10
             error('stationary distribution of random walk has negative values');
         end
@@ -145,8 +164,10 @@ end
 
 %renormalized network
 %if options.transitionmatrix
-    W=P.*repmat(d(:)',size(W,1),1);
+    %W=P.*repmat(d(:)',size(W,1),1);
 %end
+[row,col,val]=find(P);
+W=sparse(row,col,val.*d(col));
 
 
 
