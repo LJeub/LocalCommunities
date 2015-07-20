@@ -221,7 +221,7 @@ switch cut_function
         end
         if isempty(options.truncation)
             nmax=max(sum(W));
-            m=sum(W(:));
+            m=sum(sum(W));
             epsstep=(log2(m)-log2(nmax))/20;
             truncation=1./2.^(log2(nmax):epsstep:log2(m));
         else
