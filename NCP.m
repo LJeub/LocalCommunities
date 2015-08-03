@@ -241,21 +241,22 @@ end
 
 %chunking for parallelisationn (try matlabpool to get size (fails if
 %parallel toolbox is not installed))
-try
-    pool=gcp;
-    pool_size=pool.NumWorkers;
-    if pool_size==0
-        chunk=1;
-        parallel=false;
-    else
-        parallel=true;
-        chunk=pool_size;
-    end
-catch
-    chunk=1;
-    parallel=false;
-end
-
+% try
+%     pool=gcp;
+%     pool_size=pool.NumWorkers;
+%     if pool_size==0
+%         chunk=1;
+%         parallel=false;
+%     else
+%         parallel=true;
+%         chunk=pool_size;
+%     end
+% catch
+%     chunk=1;
+%     parallel=false;
+% end
+chunk=1;
+parallel=false;
 
 %preallocate
 conductance_con=ones(length(W)-1,1)*inf;
