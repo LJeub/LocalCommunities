@@ -132,6 +132,7 @@ if ~options.transitionmatrix
         W=W-diag(diag(W));
     end
     k=sum(W,1);
+    vol=sum(k);
     [row,col,val]=find(W);
     
         %P=W./repmat(sum(W,1),size(W,1),1);
@@ -139,6 +140,7 @@ if ~options.transitionmatrix
 
 else
     P=W;
+    vol=length(P);
 end
 
 if ~options.isset('stationarydistribution')
@@ -167,8 +169,8 @@ end
     %W=P.*repmat(d(:)',size(W,1),1);
 %end
 [row,col,val]=find(P);
+d=d.*vol;
 W=sparse(row,col,val.*d(col));
-
 
 
 if options.isset('local')
