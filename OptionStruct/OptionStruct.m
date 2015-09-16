@@ -50,8 +50,8 @@ classdef OptionStruct < matlab.mixin.Copyable
                 end
                 if length(input)==1
                     if isstruct(input)
-                        obj.options=fieldnames(varargin{1});
-                        obj.set(varargin{1});
+                        obj.options=fieldnames(input);
+                        obj.set(input);
                     elseif isa(input,'OptionStruct')
                         obj=copy(input);
                     else
@@ -65,7 +65,7 @@ classdef OptionStruct < matlab.mixin.Copyable
                             for i=1:2:length(input)
                                 if isvarname(lower(input{i}))
                                     obj.options=lower(input{i});
-                                    obj.option_struct.(lower(varargin{i}))=varargin{i+1};
+                                    obj.option_struct.(lower(input{i}))=input{i+1};
                                 else
                                     error('%s is not a valid option name',input{i})
                                 end
