@@ -116,7 +116,7 @@ public:
     public:
         rowiterator() : p(nullptr), m(0) {}
         rowiterator(double * init, mwSize _m, mwSize _n, mwSignedIndex _rowpos) : p(init), m(_m), n(_n) ,rowpos(_rowpos) {}
-        rowiterator & operator=(const rowiterator & it) {p=it.p; m=it.m; n=it.n; rowpos=it.rowpos; }
+        rowiterator & operator=(const rowiterator & it) {p=it.p; m=it.m; n=it.n; rowpos=it.rowpos; return *this;}
         bool operator == (const rowiterator & it) {return rowpos==it.rowpos;}
         bool operator != (const rowiterator & it) {return rowpos!=it.rowpos;}
         bool operator < (const rowiterator & it) {return rowpos<it.rowpos;}
