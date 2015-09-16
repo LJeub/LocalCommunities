@@ -26,8 +26,8 @@ function [p,not_converged,r]=APPR(alpha,epsilon,v,W,d)
 %
 % Implemented as a mex function
 
-% Version: 1.01
-% Date: Tue 25 Mar 2014 17:22:32 GMT
+% Version: 1.02
+% Date: Fri 18 Jul 2014 13:16:55 BST
 % Author: Lucas G. S. Jeub
 % Email: jeub@maths.ox.ac.uk
 
