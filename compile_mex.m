@@ -1,21 +1,30 @@
-ext=mexext;
+function compile_mex
+% Compile APPR mex function
 
+% different options for 32bit and 64bit Matlab
+ext=mexext;
 switch ext
-    case {'mexw32','mexglx','mexmac','mexmaci'}
+    case {'mexw32','mexglx','mexmac','mexmaci'} %32bit
         arraydims='-compatibleArrayDims';
-    case {'mexw64','mexa64','mexmaci64'}
+    case {'mexw64','mexa64','mexmaci64'} %64bit
         arraydims='-largeArrayDims';
-    otherwise
-        warning('unknown mexext %s, assuming 64bit')
+    otherwise %potentially new architectures in the future
+        warning('unknown mexext %s, assuming 64bit',ext)
         arraydims='-largeArrayDims';
 end
-        
 
+% set up input files
 location=fileparts(mfilename('fullpath'));
 includes=['-I',location,'/ACLcut/APPR/matlab_matrix'];
-compile=strcat(location,'/ACLcut/APPR/',{'APPR/APPR','matlab_matrix/full','matlab_matrix/sparse'},'.cpp');
+compiles=strcat(location,'/ACLcut/APPR/',{'APPR/APPR','matlab_matrix/full','matlab_matrix/sparse'},'.cpp');
 product=['/APPR.',ext];
-mex(includes,arraydims,compile{:});
+
+% compile 
+mex(includes,arraydims,compiles{:});
+
+% move product to correct location
 if ~strcmp(pwd,[location,'/ACLcut'])
     movefile([pwd,product],[location,'/ACLcut',product]);
+end
+
 end
