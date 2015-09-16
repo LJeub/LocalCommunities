@@ -2,7 +2,7 @@ function [p,not_converged,r]=APPR(alpha,epsilon,s,A,d)
 
 % [p,not_converged,r]=APPR(alpha,epsilon,s,A,d)
 %
-% APPR: computes the personalized pagerank vector
+% APPR: computes the personalized PageRank vector
 % 
 % Implements the ApproximatePR algorithm from:
 %   Andersen, R., Chung, F. R. K., & Lang, K. J. (2006).
