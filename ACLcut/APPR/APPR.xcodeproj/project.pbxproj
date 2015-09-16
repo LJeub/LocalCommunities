@@ -1,0 +1,216 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		590AA0691B26163500737911 /* full.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 590AA0661B26163500737911 /* full.cpp */; };
+		590AA06A1B26163500737911 /* sparse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 590AA0681B26163500737911 /* sparse.cpp */; };
+		59441B761A7AE07A00E134EC /* APPR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59441B741A7AE07A00E134EC /* APPR.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		590AA0661B26163500737911 /* full.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = full.cpp; path = ../matlab_matrix/full.cpp; sourceTree = SOURCE_ROOT; };
+		590AA0671B26163500737911 /* matlab_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = matlab_matrix.h; path = ../matlab_matrix/matlab_matrix.h; sourceTree = SOURCE_ROOT; };
+		590AA0681B26163500737911 /* sparse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sparse.cpp; path = ../matlab_matrix/sparse.cpp; sourceTree = SOURCE_ROOT; };
+		59441B6B1A7AE04600E134EC /* APPR.mexmaci64 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = APPR.mexmaci64; sourceTree = BUILT_PRODUCTS_DIR; };
+		59441B6E1A7AE04600E134EC /* mex.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = mex.xcconfig; sourceTree = "<group>"; };
+		59441B741A7AE07A00E134EC /* APPR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = APPR.cpp; sourceTree = "<group>"; };
+		59441B751A7AE07A00E134EC /* APPR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPR.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		590AA0651B26163500737911 /* matlab_matrix */ = {
+			isa = PBXGroup;
+			children = (
+				590AA0661B26163500737911 /* full.cpp */,
+				590AA0671B26163500737911 /* matlab_matrix.h */,
+				590AA0681B26163500737911 /* sparse.cpp */,
+			);
+			name = matlab_matrix;
+			path = ../../matlab_matrix;
+			sourceTree = "<group>";
+		};
+		59441B641A7AE04600E134EC = {
+			isa = PBXGroup;
+			children = (
+				590AA0651B26163500737911 /* matlab_matrix */,
+				59441B6D1A7AE04600E134EC /* APPR */,
+				59441B6C1A7AE04600E134EC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		59441B6C1A7AE04600E134EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				59441B6B1A7AE04600E134EC /* APPR.mexmaci64 */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		59441B6D1A7AE04600E134EC /* APPR */ = {
+			isa = PBXGroup;
+			children = (
+				59441B6E1A7AE04600E134EC /* mex.xcconfig */,
+				59441B741A7AE07A00E134EC /* APPR.cpp */,
+				59441B751A7AE07A00E134EC /* APPR.h */,
+			);
+			path = APPR;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		59441B6A1A7AE04600E134EC /* APPR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59441B711A7AE04600E134EC /* Build configuration list for PBXNativeTarget "APPR" */;
+			buildPhases = (
+				59441B691A7AE04600E134EC /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = APPR;
+			productName = APPR;
+			productReference = 59441B6B1A7AE04600E134EC /* APPR.mexmaci64 */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		59441B651A7AE04600E134EC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				TargetAttributes = {
+					59441B6A1A7AE04600E134EC = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 59441B681A7AE04600E134EC /* Build configuration list for PBXProject "APPR" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 59441B641A7AE04600E134EC;
+			productRefGroup = 59441B6C1A7AE04600E134EC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				59441B6A1A7AE04600E134EC /* APPR */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		59441B691A7AE04600E134EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				590AA0691B26163500737911 /* full.cpp in Sources */,
+				59441B761A7AE07A00E134EC /* APPR.cpp in Sources */,
+				590AA06A1B26163500737911 /* sparse.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		59441B6F1A7AE04600E134EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59441B6E1A7AE04600E134EC /* mex.xcconfig */;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		59441B701A7AE04600E134EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59441B6E1A7AE04600E134EC /* mex.xcconfig */;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		59441B721A7AE04600E134EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				DYLIB_COMPATIBILITY_VERSION = "";
+				DYLIB_CURRENT_VERSION = "";
+				EXECUTABLE_EXTENSION = mexmaci64;
+				HEADER_SEARCH_PATHS = "$(MATLABROOT)/extern/include";
+				LIBRARY_SEARCH_PATHS = "$(MATLABROOT)/bin/maci64";
+				MACH_O_TYPE = mh_bundle;
+				OTHER_LDFLAGS = (
+					"-lmx",
+					"-lmex",
+					"-lmat",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = "$(SRCROOT)/build/$(CONFIGURATION)";
+				USER_HEADER_SEARCH_PATHS = ../matlab_matrix;
+			};
+			name = Debug;
+		};
+		59441B731A7AE04600E134EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				DYLIB_COMPATIBILITY_VERSION = "";
+				DYLIB_CURRENT_VERSION = "";
+				EXECUTABLE_EXTENSION = mexmaci64;
+				GCC_OPTIMIZATION_LEVEL = fastest;
+				HEADER_SEARCH_PATHS = "$(MATLABROOT)/extern/include";
+				LIBRARY_SEARCH_PATHS = "$(MATLABROOT)/bin/maci64";
+				LLVM_LTO = YES;
+				MACH_O_TYPE = mh_bundle;
+				OTHER_LDFLAGS = (
+					"-lmx",
+					"-lmex",
+					"-lmat",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = "$(SRCROOT)/build/$(CONFIGURATION)";
+				USER_HEADER_SEARCH_PATHS = ../matlab_matrix;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		59441B681A7AE04600E134EC /* Build configuration list for PBXProject "APPR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59441B6F1A7AE04600E134EC /* Debug */,
+				59441B701A7AE04600E134EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		59441B711A7AE04600E134EC /* Build configuration list for PBXNativeTarget "APPR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59441B721A7AE04600E134EC /* Debug */,
+				59441B731A7AE04600E134EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 59441B651A7AE04600E134EC /* Project object */;
+}
