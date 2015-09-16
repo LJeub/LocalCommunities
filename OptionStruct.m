@@ -1,34 +1,22 @@
 classdef OptionStruct < matlab.mixin.Copyable
-% Class for option parsing based on structs.
-% Construct with OptionStruct(options), where options is either:
-%       a list of possible options
-%       key value pairs (listing option names and their defaults)
-%       a struct
-%       an OptionStruct (copies the option struct)
-%
-% Existing options can be accessed and changed using struct syntax.
-% (i.e. OptionStruct.option)
-% New options can only be added at construction time.
-%
-% methods: 
-%   set('key',value,...): set option values using 'key',value list
-%       (does not create new fields and errors for non-existing 
-%       options)
-%   set(struct): set options using struct (errors for non-existing 
-%       options)
-%   
-%   isfield('field'): check whether field 'field' exists
-%
-%   isset('field'): check whether option 'field' is set (i.e. not 
-%       empty). Can also take a cell array of strings, and than 
-%       returns a logical vector.
-%
-% properties: options: used to get a list of options
-
-% Version: 0.9
-% Date: Mon 24 Mar 2014 21:49:35 GMT
-% Author: Lucas Jeub
-% Email: jeub@maths.ox.ac.uk
+    % Class for option parsing based on structs.
+    % Construct with OptionStruct(options), where options is either:
+    %       a list of possible options
+    %       key value pairs (listing option names and their defaults
+    %       a struct
+    %       an OptionStruct (copies the option struct)
+    % new options can only be added at construction time
+    %
+    % methods: set: set option values (does not create new fields and warns
+    % about non-existing options)
+    %
+    % properties: options: used to get a list of options
+    %
+    % options are referred to using struct syntax, i.e. OptionStruct.option
+    % 
+    % Lucas Jeub
+    % 21/06/2013
+    % jeub@maths.ox.ac.uk
     
     properties (Hidden)
         option_struct=struct([]);
@@ -49,8 +37,8 @@ classdef OptionStruct < matlab.mixin.Copyable
                 end
                 if length(input)==1
                     if isstruct(input)
-                        obj.options=fieldnames(varargin{1});
-                        obj.set(varargin{1});
+                        obj.options=fieldnames(input);
+                        obj.set(input);
                     elseif isa(input,'OptionStruct')
                         obj=copy(input);
                     else
@@ -64,7 +52,7 @@ classdef OptionStruct < matlab.mixin.Copyable
                             for i=1:2:length(input)
                                 if isvarname(lower(input{i}))
                                     obj.options=lower(input{i});
-                                    obj.option_struct.(lower(varargin{i}))=varargin{i+1};
+                                    obj.option_struct.(lower(input{i}))=input{i+1};
                                 else
                                     error('%s is not a valid option name',input{i})
                                 end
