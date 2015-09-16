@@ -46,9 +46,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "push(full &amp; p, full &amp; r, const full &amp; d, const sparse &amp; W, queue&lt;mwIndex&gt; &amp; update, double alpha, double epsilon)"
-            landmarkType = "7">
+            endingLineNumber = "78">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -63,7 +61,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
             endingLineNumber = "67"
-            landmarkName = "push(full &amp; p, full &amp; r, const full &amp; d, const sparse &amp; W, queue&lt;mwIndex&gt; &amp; update, double alpha, double epsilon)"
+            landmarkName = "mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
