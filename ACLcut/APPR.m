@@ -1,8 +1,10 @@
-% [p,not_converged,r]=APPR(alpha,s,A)
+function [p,not_converged,r]=APPR(alpha,epsilon,s,A,d)
+
+% [p,not_converged,r]=APPR(alpha,epsilon,s,A,d)
 %
 % APPR: computes the personalized pagerank vector
 % 
-% Implements the ApproximatePR algrotihm from:
+% Implements the ApproximatePR algorithm from:
 %   Andersen, R., Chung, F. R. K., & Lang, K. J. (2006).
 %   Local Graph Partitioning using PageRank Vectors (pp. 475?486).
 %   FOCS'06
@@ -11,8 +13,8 @@
 % 
 %   alpha: teleportation parameter between 0 and 1
 %   epsilon: truncation parameter
-%   v: seed node
-%   W: adjacency matrix
+%   s: seed node
+%   A: adjacency matrix
 %   d: vector of node strengths
 %
 % Output:
@@ -29,4 +31,6 @@
 % Date: Fri 18 Jul 2014 13:16:55 BST
 % Author: Lucas G. S. Jeub
 % Email: jeub@maths.ox.ac.uk
+
+end
 
