@@ -1,4 +1,3 @@
-function [p,not_converged,r]=APPR(alpha,epsilon,v,W,d)
 % [p,not_converged,r]=APPR(alpha,s,A)
 %
 % APPR: computes the personalized pagerank vector
@@ -31,4 +30,3 @@ function [p,not_converged,r]=APPR(alpha,epsilon,v,W,d)
 % Author: Lucas G. S. Jeub
 % Email: jeub@maths.ox.ac.uk
 
-end
