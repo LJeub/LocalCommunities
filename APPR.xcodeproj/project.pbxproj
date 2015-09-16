@@ -9,17 +9,17 @@
 /* Begin PBXBuildFile section */
 		590AA0691B26163500737911 /* full.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 590AA0661B26163500737911 /* full.cpp */; };
 		590AA06A1B26163500737911 /* sparse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 590AA0681B26163500737911 /* sparse.cpp */; };
-		59441B761A7AE07A00E134EC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59441B741A7AE07A00E134EC /* main.cpp */; };
+		59441B761A7AE07A00E134EC /* APPR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59441B741A7AE07A00E134EC /* APPR.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		590AA0661B26163500737911 /* full.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = full.cpp; sourceTree = "<group>"; };
-		590AA0671B26163500737911 /* matlab_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matlab_matrix.h; sourceTree = "<group>"; };
-		590AA0681B26163500737911 /* sparse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sparse.cpp; sourceTree = "<group>"; };
+		590AA0661B26163500737911 /* full.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = full.cpp; path = ../matlab_matrix/full.cpp; sourceTree = SOURCE_ROOT; };
+		590AA0671B26163500737911 /* matlab_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = matlab_matrix.h; path = ../matlab_matrix/matlab_matrix.h; sourceTree = SOURCE_ROOT; };
+		590AA0681B26163500737911 /* sparse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sparse.cpp; path = ../matlab_matrix/sparse.cpp; sourceTree = SOURCE_ROOT; };
 		59441B6B1A7AE04600E134EC /* APPR.mexmaci64 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = APPR.mexmaci64; sourceTree = BUILT_PRODUCTS_DIR; };
 		59441B6E1A7AE04600E134EC /* mex.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = mex.xcconfig; sourceTree = "<group>"; };
-		59441B741A7AE07A00E134EC /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		59441B751A7AE07A00E134EC /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		59441B741A7AE07A00E134EC /* APPR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = APPR.cpp; sourceTree = "<group>"; };
+		59441B751A7AE07A00E134EC /* APPR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPR.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -55,11 +55,11 @@
 			isa = PBXGroup;
 			children = (
 				59441B6E1A7AE04600E134EC /* mex.xcconfig */,
-				59441B741A7AE07A00E134EC /* main.cpp */,
-				59441B751A7AE07A00E134EC /* main.h */,
+				59441B741A7AE07A00E134EC /* APPR.cpp */,
+				59441B751A7AE07A00E134EC /* APPR.h */,
 			);
 			path = APPR;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -115,7 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				590AA0691B26163500737911 /* full.cpp in Sources */,
-				59441B761A7AE07A00E134EC /* main.cpp in Sources */,
+				59441B761A7AE07A00E134EC /* APPR.cpp in Sources */,
 				590AA06A1B26163500737911 /* sparse.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +161,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = "$(SRCROOT)/build/$(CONFIGURATION)";
+				USER_HEADER_SEARCH_PATHS = ../matlab_matrix;
 			};
 			name = Debug;
 		};
@@ -184,6 +185,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = "$(SRCROOT)/build/$(CONFIGURATION)";
+				USER_HEADER_SEARCH_PATHS = ../matlab_matrix;
 			};
 			name = Release;
 		};
