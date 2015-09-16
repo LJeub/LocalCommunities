@@ -1,58 +1,69 @@
 //
-//  main.cpp
+//  APPR.cpp
 //  APPR
 //
 //  Created by Lucas Jeub on 29/01/2015.
 //
 //
+// Approximate Personalised PageRank computation using the algorithm from:
+//
+//      Andersen, R., Chung, F. R. K., & Lang, K. J. (2006).
+//      Local Graph Partitioning using PageRank Vectors (pp. 475–486).
+//      in Proceedings of the 47th Annual Symposium on Foundations of Computer
+//      Science, IEEE. http://doi.org/10.1109/FOCS.2006.44
 
-#include "main.h"
+#include "APPR.h"
 
 #define MAXITER 1000000
 
 using namespace std;
 
+// Provides APPR function:
+// [p, flag, r] = APPR(alpha, epsilon, seed, W, d)
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]){
+    //input check
     if (nrhs!=5) {
         mexErrMsgIdAndTxt("APPR:input", "APPR needs 5 input arguments");
     }
-    //input:
     
+    //input:
     double alpha= * mxGetPr(prhs[0]);
     double epsilon= * mxGetPr(prhs[1]);
-    
     full seed(prhs[2]); //make sure to copy as this will be modified
+    full r=seed;
+
     sparse W(prhs[3]);
     full d(prhs[4]);
     
-    full r=seed;
     
     //number of nodes
     mwIndex N=W.m;
     
     
-    //initialise queue
-    queue<mwIndex> update;
-    
+    //initialise APPR vector
     full p(N,1);
     for (mwIndex i=0; i<N; ++i) {
         p.get(i)=0;
     }
     
     
+    //initialise queue
+    queue<mwIndex> update;
     for (mwIndex i=0; i<N; ++i) {
         if (r.get(i)>epsilon*d.get(i)) {
             update.push(i);
         }
     }
     
-    mwIndex iter=0;
     
+    //push until convergence
+    mwIndex iter=0;
     while (!update.empty() && iter < MAXITER ) {
         push(p, r, d, W, update, alpha, epsilon);
         ++iter;
     }
     
+    //output:
     p.export_matlab(plhs[0]);
     if (nlhs>1) {
        plhs[1]=mxCreateLogicalScalar(iter==MAXITER);
@@ -63,6 +74,8 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]){
 
 }
 
+
+//push algorithm
 void push(full & p, full & r, const full & d, const sparse & W, queue<mwIndex> & update, double alpha, double epsilon) {
     mwIndex node=update.front();
     update.pop();
