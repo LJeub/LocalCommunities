@@ -21,12 +21,23 @@ function [ A_c,ind] = LCC(A )
 % Author: Lucas G. S. Jeub
 % Email: jeub@maths.ox.ac.uk
 
-[C,sizes]=components(max(A,A'));
+if iscell(A)
+    At=make_total(A);
+    [C,sizes]=components(max(At,At'));
+    [~,k]=max(sizes);
+    ind=find(C==k);
+    for i=1:length(A)
+        A_c{i}=A{i}(ind,ind);
+    end
+else
 
-[~,k]=max(sizes);
-ind=find(C==k);
+    [C,sizes]=components(max(A,A'));
 
-A_c=A(ind,ind);
+    [~,k]=max(sizes);
+    ind=find(C==k);
+
+    A_c=A(ind,ind);
+end
 
 end
 
