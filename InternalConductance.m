@@ -4,7 +4,7 @@ function [int_cond]=InternalConductance(W,S)
 % InternalConductance: Compute internal conductance of communities
 %
 % Inputs:
-%           W: adjacnecy matrix
+%           W: adjacency matrix
 %           S: cell array of communities. Each element of the cell array
 %               should be a vector of node indeces, giving the nodes in the
 %               community. This function also accepts a single community
@@ -24,6 +24,11 @@ function [int_cond]=InternalConductance(W,S)
 
 if ~iscell(S)
     S={S};
+end
+
+if ~issparse(W)
+    warning('Input adjacency matrix is full, converting to sparse')
+    W=sparse(W);
 end
 
 int_cond=ones(size(S))*nan; %missing data will be coded nan;
