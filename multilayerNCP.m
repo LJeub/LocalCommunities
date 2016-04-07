@@ -5,10 +5,7 @@ NCPoptions=OptionStruct('nodes',length(W)*length(W{1}),'local',[],'alpha',[],'tr
     'viscount',10,'aggressive',true,'transitionmatrix',false,'stationarydistribution',[],'teleportation',[]);
 ncpopts=options.setvalid(varargin);
 NCPoptions.set(ncpopts);
-if ~isstruct(NCPoptions)
-    NCPoptions=NCPoptions(:);
-    NCPoptions=struct(NCPoptions(1:2:end),NCPoptions(2:2:end),1);
-end
+
 
 switch options.walktype
     case 'classical'
@@ -35,13 +32,13 @@ switch nargout
     case {0,1}
         [conductance_con]=NCP(W,cut_function,NCPoptions);
     case 2
-        [conductance_con,communities_con]=multilayerNCP(W,cut_function,NCPoptions);
+        [conductance_con,communities_con]=NCP(W,cut_function,NCPoptions);
     case 3
-        [conductance_con,communities_con,conductance_dis]=multilayerNCP(W,cut_function,NCPoptions);
+        [conductance_con,communities_con,conductance_dis]=NCP(W,cut_function,NCPoptions);
     case 4
-        [conductance_con,communities_con,conductance_dis,communities_dis]=multilayerNCP(W,cut_function,NCPoptions);
+        [conductance_con,communities_con,conductance_dis,communities_dis]=NCP(W,cut_function,NCPoptions);
     case 5
-        [conductance_con,communities_con,conductance_dis,communities_dis,assoc_mat]=multilayerNCP(W,cut_function,NCPoptions);
+        [conductance_con,communities_con,conductance_dis,communities_dis,assoc_mat]=NCP(W,cut_function,NCPoptions);
 end
         
 end
