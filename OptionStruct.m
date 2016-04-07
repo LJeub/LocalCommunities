@@ -1,22 +1,34 @@
 classdef OptionStruct < matlab.mixin.Copyable
-    % Class for option parsing based on structs.
-    % Construct with OptionStruct(options), where options is either:
-    %       a list of possible options
-    %       key value pairs (listing option names and their defaults
-    %       a struct
-    %       an OptionStruct (copies the option struct)
-    % new options can only be added at construction time
-    %
-    % methods: set: set option values (does not create new fields and warns
-    % about non-existing options)
-    %
-    % properties: options: used to get a list of options
-    %
-    % options are referred to using struct syntax, i.e. OptionStruct.option
-    % 
-    % Lucas Jeub
-    % 21/06/2013
-    % jeub@maths.ox.ac.uk
+% Class for option parsing based on structs.
+% Construct with OptionStruct(options), where options is either:
+%       a list of possible options
+%       key value pairs (listing option names and their defaults)
+%       a struct
+%       an OptionStruct (copies the option struct)
+%
+% Existing options can be accessed and changed using struct syntax.
+% (i.e. OptionStruct.option)
+% New options can only be added at construction time.
+%
+% methods: 
+%   set('key',value,...): set option values using 'key',value list
+%       (does not create new fields and errors for non-existing 
+%       options)
+%   set(struct): set options using struct (errors for non-existing 
+%       options)
+%   
+%   isfield('field'): check whether field 'field' exists
+%
+%   isset('field'): check whether option 'field' is set (i.e. not 
+%       empty). Can also take a cell array of strings, and than 
+%       returns a logical vector.
+%
+% properties: options: used to get a list of options
+
+% Version: 0.9
+% Date: Mon 24 Mar 2014 21:49:35 GMT
+% Author: Lucas Jeub
+% Email: jeub@maths.ox.ac.uk
     
     properties (Hidden)
         option_struct=struct([]);
@@ -86,16 +98,16 @@ classdef OptionStruct < matlab.mixin.Copyable
         end
         
         %subscripted reference
-        function val=subsref(obj,S)
+        function varargout=subsref(obj,S)
             if isequal(S(1).type,'.')
                 try
-                    val=builtin('subsref',obj,S);
+                    varargout=builtin('subsref',obj,S);
                     return;
                 catch err
                     if strcmp(err.identifier,'MATLAB:noSuchMethodOrField')
                         S(1).subs=lower(S(1).subs);
                         if obj.isfield(S(1).subs)
-                            val=builtin('subsref',obj.option_struct,S);
+                            varargout=builtin('subsref',obj.option_struct,S);
                         else
                             error('option %s does not exist',S.subs);
                         end
@@ -132,11 +144,8 @@ classdef OptionStruct < matlab.mixin.Copyable
         end
         
         %set options (takes a 'struct' or 'key','value' pairs)
-        function obj=set(obj,varargin)
-            input=varargin;
-            while iscell(input)&&length(input)==1
-                input=input{1};
-            end
+        function set(obj,varargin)
+            input=obj.unpack_nested(varargin);
             if length(input)==1
                 if isstruct(input)
                     fields=fieldnames(input);
@@ -155,6 +164,40 @@ classdef OptionStruct < matlab.mixin.Copyable
             end
         end
         
+        function remaining_options=setvalid(obj,varargin)
+            input=obj.unpack_nested(varargin);
+            return_list=true;
+            if length(input)==1
+                if ~isstruct(input)
+                    error('need input struct');
+                else
+                    fields=fieldnames(input);
+                    return_list=false;
+                end
+            else
+                if mod(length(input),2)==0
+                    fields=input(1:2:end);
+                    values=input(2:2:end);
+                    input=cell2struct(values(:),fields,1);
+                else
+                    error('option list has odd length');
+                end
+            end
+            for i=1:length(fields)
+                if obj.isfield(lower(fields{i}))
+                    obj.option_struct.(lower(fields{i}))=input.(fields{i});
+                    input=rmfiled(input,fields{i});
+                end
+            end
+            if return_list
+                fields=fieldnames(input);
+                values=struct2cell(input);
+                remaining_options(1:2:2*length(fields)-1)=fields;
+                remaining_options(2:2:2*length(fields))=values;
+            else
+                remaining_options=input;
+            end
+        end
         function is_opt=isfield(obj,fieldname)
             is_opt=isfield(obj.option_struct,lower(fieldname));
         end
@@ -173,6 +216,17 @@ classdef OptionStruct < matlab.mixin.Copyable
             for i=1:length(fieldname)
                 is_set(i)=~isempty(obj.option_struct.(fieldname{i}));
             end
+        end
+        
+        function options=struct(obj)
+            options=obj.option_struct;
+        end
+        
+        function options=list(obj)
+            opts=obj.options;
+            vals=struct2cell(obj.option_struct);
+            options=[opts(:)';vals(:)'];
+            options=options(:)';
         end
         
     end
@@ -194,6 +248,12 @@ classdef OptionStruct < matlab.mixin.Copyable
                 end
             else
                 error('option list has to be a cell array')
+            end
+        end
+        
+        function input=unpack_nested(obj,input)
+            while iscell(input)&&length(input)==1
+                input=input{1};
             end
         end
     end
