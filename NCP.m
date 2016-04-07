@@ -123,7 +123,14 @@ if ~options.isset('stationarydistribution')
     end
     clear('WC');
 else
-    original_node_index=1:length(W);
+    % remove nodes with 0 mass in stationary distribution
+    original_node_index=find(options.stationarydistribution);
+    if length(original_node_index)~=length(W)
+        warning('considering only nodes with non-zero mass in stationary distribution');
+        W=W(original_node_index,original_node_index);
+        N=min(N,length(original_node_index));
+        options.stationarydistribution=options.stationarydistribution(original_node_index);
+    end
 end
 
 if ~options.transitionmatrix
@@ -160,7 +167,7 @@ if ~options.isset('stationarydistribution')
         d=d/sum(d);
     end
 else
-    d=options.stationarydistribution(:)';
+    d=options.stationarydistribution(:);
 end
 
 
