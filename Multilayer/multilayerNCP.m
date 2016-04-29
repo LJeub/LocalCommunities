@@ -12,32 +12,63 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 %                       walktype: 'classical' or 'relaxed'
 %
 %                       layercoupling: strength of interlayer edges for
-%                       'classical' walk or relax rate for 'relaxed' walk
+%                           'classical' walk or relax rate for 'relaxed' walk
 %
 %                       teleportation: teleportation rate (useful for
-%                       directed networks) for unrecorded link
-%                       teleportation
+%                           directed networks) for unrecorded link
+%                           teleportation
+%
+%                       physicalnodes: (false) set to true to sample NCP
+%                           using physical nodes
 %
 %                       + all options for NCP
 %
 %                       Note about 'local' option for NCP:
+%                       If option 'physicalnodes' is set to false,
 %                       nodes can be specified either using the state-node
 %                       id (single number form 1:#nodes*#layers) or as a
-%                       pair of node id and layer id. If providing to state
+%                       pair of node id and layer id. If providing two state
 %                       indeces make sure they are provided as a column
 %                       vector (otherwise it's treated as a node-layer
 %                       pair). Node-layer pairs need to be provided as a
 %                       nx2 matrix, where each row is a node-layer pair.
 %
+%                       If option 'physicalnodes' is set to true, 'local'
+%                       should contain indeces of physical nodes.
+%
 
-options=OptionStruct('walktype','classical','layercoupling',1,'teleportation',0);
+options=OptionStruct('walktype','classical','layercoupling',1,'teleportation',0,'physicalnodes',false);
 NCPoptions=OptionStruct('nodes',length(A)*length(A{1}),'local',[],'alpha',[],'truncation',[],...
     'viscount',10,'aggressive',true,'transitionmatrix',false,'stationarydistribution',[],'teleportation',[]);
 ncpopts=options.setvalid(varargin);
 NCPoptions.set(ncpopts);
 
 N=length(A{1});
+% deal with physicalnodes option by setting the local option for NCP
+if options.physicalnodes
+    p_nodes=cell(N,1);
+    for i=1:N
+        p_nodes{i}=[repmat(i,length(A),1),(1:length(A))'];
+    end
+    if NCPoptions.isset('local')
+        if iscell(NCPoptions.local)
+            local=cell(length(NCPoptions.local),1);
+            for i=1:length(NCPoptions.local)
+                local{i}=vertcat(p_nodes{NCPoptions.local{i}});
+            end
+            NCPoptions.local=local;
+        else
+            NCPoptions.local=p_nodes(NCPoptions.local);
+        end
+    else
+        NCPoptions.local=p_nodes;
+    end
+end
 
+% convert 'local' option given as nodelayer index to state index
+if NCPoptions.isset('local')
+    NCPoptions.local=nodelayer2state(N,NCPoptions.local);
+end
 
 switch options.walktype
     case 'classical'
@@ -58,11 +89,6 @@ switch options.walktype
         p=page_rank(A,options.teleportation,kin);
         NCPoptions.stationarydistribution=p;
         NCPoptions.transitionmatrix=true;
-end
-
-% convert 'local' option given as nodelayer index to state index
-if NCPoptions.isset('local')
-    NCPoptions.local=nodelayer2state(N,NCPoptions.local);
 end
 
 % Call NCP with appropriate number of outputs for efficiency
