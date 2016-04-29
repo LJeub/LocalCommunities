@@ -218,10 +218,9 @@ switch cut_function
             alpha=options.alpha;
         end
         if isempty(options.truncation)
-            nmax=max(sum(W));
-            m=sum(sum(W));
-            epsstep=(log2(m)-log2(nmax))/20;
-            truncation=1./2.^(log2(nmax):epsstep:log2(m));
+            nmax=full(max(sum(W)));
+            m=full(sum(sum(W)));
+            truncation=logspace(-log10(nmax),-log10(m),20);
         else
             truncation=options.truncation;
         end
@@ -234,27 +233,6 @@ switch cut_function
     otherwise
         error('NCP:cut_function','unknown cut function');
 end
-
-
-
-%chunking for parallelisationn (try matlabpool to get size (fails if
-%parallel toolbox is not installed))
-% try
-%     pool=gcp;
-%     pool_size=pool.NumWorkers;
-%     if pool_size==0
-%         chunk=1;
-%         parallel=false;
-%     else
-%         parallel=true;
-%         chunk=pool_size;
-%     end
-% catch
-%     chunk=1;
-%     parallel=false;
-% end
-chunk=1;
-parallel=false;
 
 %preallocate
 conductance_con=ones(length(W)-1,1)*inf;
@@ -271,9 +249,6 @@ if nargout>4
     assoc_mat=zeros(length(W));
 end
 
-
-argout=nargout;
-
 for j=1:length(alpha)
     for k=1:length(truncation)
         visitcount=zeros(length(W),1);
@@ -283,110 +258,62 @@ for j=1:length(alpha)
         %due to visitcount reached
         nodes=node_sampler();
         while min(visitcount)<min_viscount&&i<=length(nodes)
-            if parallel
-                loopsize=min(chunk-1,length(nodes)-i);
-                loopnodes=nodes(i:i+loopsize);
-                alphal=alpha(j);
-                truncl=truncation(k);
-                try
-                    parfor it=1:length(loopnodes)
-                        [suppl{it},condl{it},flag,connectedl{it}]=f_handle(W,d,loopnodes(it),alphal,truncl);
-                        if flag
-                            error('not converged')
-                        end
-                    end
-                catch err
-                    
-                    if ~isempty(strfind(err.message,'not converged'))
-                        warning('maximum number of iterations reached while computing pagerank, skipping to next parameter value')
-                        break
-                    else
-                        rethrow(err);
-                    end
+            
+            [supp,cond,flag,connected]=f_handle(W,d,nodes(i),alpha(j),truncation(k));
+            
+            if flag
+                warning('maximum number of iterations reached while computing pagerank, skipping to next parameter value')
+                break
+            end
+            
+            if ~isempty(supp)
+                [~,mk]=min(cond);
+                visitcount(supp(1:mk))=visitcount(supp(1:mk))+1;
+            end
+            
+            n_supp=length(supp);
+            update=find((cond(:)<conductance_con(1:n_supp))&connected(:));
+            conductance_con(update)=cond(update);
+            
+            if nargout>1
+                for l=update(:)'
+                    communities_con{l}=original_node_index(supp(1:l));
                 end
-                
-                for it=1:length(suppl)
-                    supp=suppl{it};
-                    cond=condl{it};
-                    connected=connectedl{it};
-                    n_supp=length(supp);
-                    if ~isempty(supp)
-                        [~,mk]=min(cond);
-                        visitcount(supp(1:mk))=visitcount(supp(1:mk))+1;
-                    end
-                    
-                    update=find((cond(:)<conductance_con(1:n_supp))&connected(:));
-                    conductance_con(update)=cond(update);
-                    if argout>1
-                        for l=update(:)'
-                            communities_con{l}=original_node_index(supp(1:l));
-                        end
-                    end
-                    
-                    if argout>2
-                        update_dis=find((cond(:)<conductance_dis(1:n_supp)));
-                        conductance_dis(update_dis)=cond(update_dis);
-                        if argout>3
-                            for l=update(:)'
-                                communities_dis{l}=original_node_index(supp(1:l));
-                            end
-                        end
-                    end
-                    
-                    if argout>4
-                        if ~isempty(supp)
-                            assoc_mat(supp(1:mk),supp(1:mk))=assoc_mat(supp(1:mk),supp(1:mk))+1;
-                        end
-                    end
-                end
-                i=i+length(suppl);
-            else
-                [supp,cond,flag,connected]=f_handle(W,d,nodes(i),alpha(j),truncation(k));
-                if flag
-                    warning('maximum number of iterations reached while computing pagerank, skipping to next parameter value')
-                    break
-                end
-                if ~isempty(supp)
-                    [~,mk]=min(cond);
-                    visitcount(supp(1:mk))=visitcount(supp(1:mk))+1;
-                end
-                n_supp=length(supp);
-                
-                update=find((cond(:)<conductance_con(1:n_supp))&connected(:));
-                conductance_con(update)=cond(update);
-                if argout>1
+            end
+            
+            if nargout>2
+                update_dis=find(cond(:)<conductance_dis(1:n_supp));
+                conductance_dis(update_dis)=cond(update_dis);
+                if nargout>3
                     for l=update(:)'
-                        communities_con{l}=original_node_index(supp(1:l));
+                        communities_dis{l}=original_node_index(supp(1:l));
                     end
                 end
-                
-                if argout>2
-                    update_dis=find(cond(:)<conductance_dis(1:n_supp));
-                    conductance_dis(update_dis)=cond(update_dis);
-                    if argout>3
-                        for l=update(:)'
-                            communities_dis{l}=original_node_index(supp(1:l));
-                        end
-                    end
+            end
+            
+            if nargout>4
+                if ~isempty(supp)
+                    assoc_mat(supp(1:mk),supp(1:mk))=assoc_mat(supp(1:mk),supp(1:mk))+1;
                 end
-                
-                if argout>4
-                    if ~isempty(supp)
-                        assoc_mat(supp(1:mk),supp(1:mk))=assoc_mat(supp(1:mk),supp(1:mk))+1;
-                    end
-                end
-                
-                i=i+1;
+            end
+            
+            if min(visitcount)>=min_viscount
+                disp(['min_viscount reached with ',num2str(min(visitcount)),' visits after ',num2str(i),' iterations']);
             end
             
             if aggressive
-                remove=find(visitcount(nodes(i:end))>=min_viscount);
-                nodes((i-1)+remove)=[];
+                if iscell(nodes)
+                    remove=find(cellfun(@(nn) all(visitcount(nn)>=min_viscount),nodes(i+1:end)));
+                else
+                    remove=find(visitcount(nodes(i+1:end))>=min_viscount);
+                end
+                nodes((i)+remove)=[];
             end
-        end
-        if min(visitcount)>=min_viscount
-                disp(['min_viscount reached with ',num2str(min(visitcount)),' visits after ',num2str(i),' iterations']);
+            
+            i=i+1;
         end
         fprintf('sampled %u nodes\n',length(nodes));
     end
+end
+
 end
