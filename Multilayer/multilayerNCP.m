@@ -70,23 +70,24 @@ if NCPoptions.isset('local')
     NCPoptions.local=nodelayer2state(N,NCPoptions.local);
 end
 
+% set up different walk types
 switch options.walktype
     case 'classical'
         A=supra_adjacency(A,options.layercoupling);
-        if options.teleportation>0
-            kin=sum(A,2);
-            kout=sum(A,1);
-            A=A*diag(kout.^-1);
-            p=page_rank(A,options.teleportation,kin);
-            NCPoptions.stationarydistribution=p;
-            NCPoptions.transitionmatrix=true;
-        end
+        kin=sum(A,2);
+        kout=sum(A,1);
+        A=A*diag(kout.^-1);
+        p=page_rank(A,options.teleportation,kin);
+        NCPoptions.stationarydistribution=p;
+        NCPoptions.transitionmatrix=true;
+        
     case 'relaxed'
         P=relax_rate_walk(A);
         A=spblkdiag(A{:});
         kin=sum(A,2);
         A=P(options.layercoupling);
         p=page_rank(A,options.teleportation,kin);
+        p(kin==0)=0; % ensure these get removed later
         NCPoptions.stationarydistribution=p;
         NCPoptions.transitionmatrix=true;
 end
@@ -110,10 +111,6 @@ switch nargout
         communities_con=state2nodelayer(N,communities_con);
         communities_dis=state2nodelayer(N,communities_dis);
 end
-
-
-
-    
 
 end
 
