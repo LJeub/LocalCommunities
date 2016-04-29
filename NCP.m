@@ -166,7 +166,7 @@ end
 %end
 [row,col,val]=find(P);
 d=d.*vol;
-W=sparse(row,col,val.*d(col));
+W=sparse(row,col,val.*d(col),size(P,1),size(P,2));
 
 if options.isset('local')
     local=options.local;
