@@ -6,21 +6,21 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 % This function (with the appropriate options listed below) can be used
 % to compute approximate local and global NCPs for a network using any
 % of the three methods in:
-% Jeub, L. G. S., Balachandran, P., Porter, M. A., Mucha, P. J., 
+% Jeub, L. G. S., Balachandran, P., Porter, M. A., Mucha, P. J.,
 % & Mahoney, M. W. (2014).
-% Think Locally, Act Locally: The Detection of Small, Medium-Sized, and 
+% Think Locally, Act Locally: The Detection of Small, Medium-Sized, and
 % Large Communities in Large Networks. arXiv:1403.3795 [cs.SI]
 %
 % Inputs:
 %           W: adjacency matrix
 %
-%           cut_function: choose method to find local communities 
-%               (either 'ACL', 'MOV', or 'EGO'). 
-% 
+%           cut_function: choose method to find local communities
+%               (either 'ACL', 'MOV', or 'EGO').
+%
 %           Additional options can be given using 'key',value pairs listed
 %           below (with default values given in []).
 %
-% Outputs: 
+% Outputs:
 %           conductance_con: vector of minimum conductance values
 %               considering only connected communities, e.g.
 %               conductance_con(10) gives the minimum conductance found for
@@ -43,7 +43,7 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 %               nodes i and j have appeared together in a sampled
 %               community. (The association matrix counts only the best
 %               community for a seed node and choice of parameter values)
-%         
+%
 %
 % Options:
 %           nodes [all nodes]: number of nodes to sample for each pair of
@@ -55,7 +55,7 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 %               given by the nodes option is less than the number of nodes
 %               specified by local, nodes are sampled uniformly at random
 %               from those specified in local.
-%           
+%
 %           alpha [network and method dependend]: teleportation parameter,
 %               for 'ACL' this corresponds to the teleportation parameter
 %               in the lazy random walk, and for 'MOV' this corresponds to
@@ -72,12 +72,12 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 %               the best community before the sampling is stopped.
 %
 %           aggressive: [false]: if set to `true`, a node that has
-%               been in the best community more than `viscount` times is
+%               been in the best community at least `viscount` times is
 %               never used as a seed node.
 %
 %           teleportation: [0.1]: for directed networks use unrecorded link
 %               teleportations with teleportation parameter `teleportation`
-%               to estimate stationary distribution (unless
+%               to estimate stationary distribution (No effect when
 %               `stationarydistribution` is given)
 %
 %           stationarydistribution: []: specify to use stationary
@@ -92,7 +92,7 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 % using the ACLcut method with alpha=0.01, one would call the function as
 %   conductance=NCP(W,'ACL','alpha',0.01);
 %
-% One can then plot the NCP using 
+% One can then plot the NCP using
 %   loglog(conductance)
 %
 % see also ACLcut MOVcut normalize_assoc_mat
@@ -103,17 +103,19 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 % Email: jeub@maths.ox.ac.uk
 
 % Parse Options
-options=OptionStruct('nodes',length(W),'local',[],'alpha',[],'truncation',[],...
-    'viscount',10,'aggressive',false,'transitionmatrix',false,'stationarydistribution',[],'teleportation',0.1); %set defaults
+options=OptionStruct('nodes',length(W),'local',[],'alpha',[],...
+    'truncation',[],'viscount',10,'aggressive',false,...
+    'transitionmatrix',false,'stationarydistribution',[],...
+    'teleportation',0.1); %set defaults
 options.set(varargin); %set given options
 
-% check W is connected, no self-edges (otherwise fix)
+
 W=sparse(W);
 N=options.nodes;
-
 aggressive=options.aggressive;
 
 if ~options.isset('stationarydistribution')
+    % check W is connected
     [WC,original_node_index]=LCC(W);
     
     if length(WC)~=length(W)
@@ -141,10 +143,7 @@ if ~options.transitionmatrix
     k=sum(W,1);
     vol=sum(k);
     [row,col,val]=find(W);
-    
-        %P=W./repmat(sum(W,1),size(W,1),1);
-        P=sparse(row,col,val./k(col)');
-
+    P=sparse(row,col,val./k(col)');
 else
     P=W;
     vol=length(P);
@@ -152,16 +151,7 @@ end
 
 if ~options.isset('stationarydistribution')
     if ~isequal(W,W')
-          d=page_rank(P,options.teleportation,sum(W,2));
-%         [d,eigval]=eigs(P,1);
-%         if norm(eigval-1)>10^-10
-%             error('largest eigenvalue of transition matrix not equal to 1')
-%         end
-%         d=d/sum(d);
-        if min(d)<-10^-10
-            error('stationary distribution of random walk has negative values');
-        end
-        d=min(max(d,0),1); %clean numerical error
+        d=page_rank(P,options.teleportation,sum(W,2));
     else
         d=sum(W,2);
         d=d/sum(d);
@@ -170,23 +160,22 @@ else
     d=options.stationarydistribution(:);
 end
 
-
 %renormalized network
 %if options.transitionmatrix
-    %W=P.*repmat(d(:)',size(W,1),1);
+%W=P.*repmat(d(:)',size(W,1),1);
 %end
 [row,col,val]=find(P);
 d=d.*vol;
 W=sparse(row,col,val.*d(col));
 
-
 if options.isset('local')
-    local=options.local; 
+    local=options.local;
     %reindex to LCC
     if iscell(local)
         for i=1:length(local)
             local{i}=find(ismember(original_node_index,local{i}));
         end
+        local=local(~cellfun(@isempty,local));
     else
         local=find(ismember(original_node_index,local));
     end
@@ -201,7 +190,7 @@ end
 
 min_viscount=options.viscount;
 
-
+% set defaults for truncation and alpha based on cut_function
 switch cut_function
     
     case 'MOV'
