@@ -1,16 +1,17 @@
 function state=nodelayer2state(N,nodelayer)
-% convert node-layer indeces 2 statenode indeces
+% convert node-layer indeces to state indeces
 %
 % Input:
 %           N: number of nodes of the network
 %
 %           nodelayer: nx2 matrix of node-layer indeces or cell array of
-%           nx2 matrices of node-layer indeces.
+%                      nx2 matrices of node-layer indeces.
 %
 % Output:
-%           state: nx1 vector of statenode indeces
+%           state: nx1 vector of state indeces
 %
 % Note: if input is a vector, the function returns the input unchanged.
+
 if iscell(nodelayer)
     state=cell(size(nodelayer));
     for nl=1:numel(nodelayer)
