@@ -78,10 +78,12 @@ switch options.walktype
         kout=sum(A,1);
         A=A*diag(kout.^-1);
         p=page_rank(A,options.teleportation,kin);
-        if max(p(kin==0))<10^-10
-            p(kin==0)=0; % ensure these get removed later
-        else
-            error('excessive numerical error in page_rank calculation')
+        if any(kin==0)
+            if max(p(kin==0))<10^-10
+                p(kin==0)=0; % ensure these get removed later
+            else
+                error('excessive numerical error in page_rank calculation')
+            end
         end
         NCPoptions.stationarydistribution=p;
         NCPoptions.transitionmatrix=true;
@@ -92,10 +94,12 @@ switch options.walktype
         kin=sum(A,2);
         A=P(options.layercoupling);
         p=page_rank(A,options.teleportation,kin);
-        if max(p(kin==0))<10^-10
-            p(kin==0)=0; % ensure these get removed later
-        else
-            error('excessive numerical error in page_rank calculation')
+        if any(kin==0)
+            if max(p(kin==0))<10^-10
+                p(kin==0)=0; % ensure these get removed later
+            else
+                error('excessive numerical error in page_rank calculation')
+            end
         end
         NCPoptions.stationarydistribution=p;
         NCPoptions.transitionmatrix=true;
