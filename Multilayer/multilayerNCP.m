@@ -1,6 +1,8 @@
 function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_mat]=multilayerNCP(A,cut_function,varargin)
 % Convenience wrapper around NCP for multiplex networks
 %
+% 
+%
 % Input:
 %           A: cell array of adjacency matrices for each layer of the
 %           network (all layers need to be the same size)
@@ -10,23 +12,27 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 %
 %           options:
 %                       walktype: 'classical' or 'relaxed'
+%                           [default: 'classical']
 %
 %                       layercoupling: strength of interlayer edges for
 %                           'classical' walk or relax rate for 'relaxed' walk
+%                           [default: 1]
 %
 %                       teleportation: teleportation rate (useful for
 %                           directed networks) for unrecorded link
 %                           teleportation
+%                           [default: 0]
 %
-%                       physicalnodes: (false) set to true to sample NCP
+%                       physicalnodes: when set to true, sample NCP
 %                           using physical nodes
+%                           [default: false]
 %
 %                       + all options for NCP
 %
 %                       Note about 'local' option for NCP:
 %                       If option 'physicalnodes' is set to false,
 %                       nodes can be specified either using the state-node
-%                       id (single number form 1:#nodes*#layers) or as a
+%                       id (single number from 1:#nodes*#layers) or as a
 %                       pair of node id and layer id. If providing two state
 %                       indeces make sure they are provided as a column
 %                       vector (otherwise it's treated as a node-layer
@@ -36,6 +42,29 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 %                       If option 'physicalnodes' is set to true, 'local'
 %                       should contain indeces of physical nodes.
 %
+% Output:
+%           conductance_con: vector of minimum conductance values
+%               considering only connected communities, e.g.
+%               conductance_con(10) gives the minimum conductance found for
+%               communities with 10 state nodes that are connected.
+%               For cut_function='EGO', this only considers communities
+%               that are actual sweep sets (i.e. nodes with the same
+%               distance from the seed node are either all included or not
+%               included)
+%
+%           communities_con: returns communities that achieve the
+%               minimum conductance values in conductance_con
+%
+%           conductance_dis: vector of minimum conductance values, also
+%               allowing disconnected communities, and in the case 'EGO',
+%               also communities that are not sweep sets.
+%
+%           communities_dis: communities corresponding to conductance_dis
+%
+%           assoc_mat: association matrix, assoc_mat(i,j) = number of times
+%               nodes i and j have appeared together in a sampled
+%               community. (The association matrix counts only the best
+%               community for a seed node and choice of parameter values)
 
 options=OptionStruct('walktype','classical','layercoupling',1,'teleportation',0,'physicalnodes',false);
 NCPoptions=OptionStruct('nodes',length(A)*length(A{1}),'local',[],'alpha',[],'truncation',[],...
@@ -65,7 +94,7 @@ if options.physicalnodes
     end
 end
 
-% convert 'local' option given as nodelayer index to state index
+% convert 'local' option given as nodelayer indeces to state indeces
 if NCPoptions.isset('local')
     NCPoptions.local=nodelayer2state(N,NCPoptions.local);
 end
