@@ -8,7 +8,7 @@ function [support,conductance,flag,sweep_set]=EGOcut(W,d,seed,~,~,max_vol)
 %
 %   W: adjacency matrix
 %   d: vector of node strength
-%   seed: seed node
+%   seed: seed node or seed set of nodes
 %
 % Outputs:
 %   
@@ -29,10 +29,22 @@ if nargin<6
     max_vol=0.5*sum(d);
 end
 
+if iscell(seed)
+    if length(seed)==1
+        seed=seed{1};
+    else
+        error('EGOcut only accepts a single seed set as input')
+    end
+end
+
 % use inverse weight as distance
 D=W;
 D(W>0)=1./(W(W>0));
-egorank=shortest_paths(D,seed);
+egorank=zeros(length(seed),length(W));
+for i=1:length(seed)
+    egorank(i,:)=shortest_paths(D,seed(i));
+end
+egorank=min(egorank,[],1);
 egorank=1./(1+egorank);
 
 [conductance,support]=sweep_cut(egorank,W,d,max_vol);

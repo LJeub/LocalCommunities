@@ -30,9 +30,18 @@ function [support, conductance, flag, connected]=MOVcut(W,d,seed,gamma,c)
 % Author: Lucas G. S. Jeub
 % Email: jeub@maths.ox.ac.uk
 
+%unpack passed cell array 
+if iscell(seed)
+    if length(seed)==1
+        seed=seed{1};
+    else
+        error('MOVcut only accepts a single seed set as input')
+    end
+end
+
 D=diag(d);
 
-s=sparse(seed,1,1,size(W,2),1); %creates seed vector using seed
+s=sparse(seed,1,1/length(seed),size(W,2),1); %creates seed vector using seed
 s=s-(s'*d(:)/(d(:)'*d(:)))*d(:); %othogonalizes s relative to degree sequence
 s=s/sqrt((s'*D*s)); %normalizes s appropriately
 
