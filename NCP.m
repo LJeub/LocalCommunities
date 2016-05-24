@@ -71,9 +71,11 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 %           viscount [10]: minimum number of times each node needs to be in
 %               the best community before the sampling is stopped.
 %
-%           aggressive: [false]: if set to `true`, a node that has
+%           aggressive: [true]: if set to `true`, a node that has
 %               been in the best community at least `viscount` times is
-%               never used as a seed node.
+%               never used as a seed node, if set to 'false', only stop 
+%               iterating early when all nodes have been visited at least 
+%               'viscount' times.
 %
 %           teleportation: [0.1]: for directed networks use unrecorded link
 %               teleportations with teleportation parameter `teleportation`
@@ -104,7 +106,7 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 
 % Parse Options
 options=OptionStruct('nodes',length(W),'local',[],'alpha',[],...
-    'truncation',[],'viscount',10,'aggressive',false,...
+    'truncation',[],'viscount',10,'aggressive',true,...
     'transitionmatrix',false,'stationarydistribution',[],...
     'teleportation',0.1); %set defaults
 options.set(varargin); %set given options
