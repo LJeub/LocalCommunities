@@ -314,7 +314,7 @@ for j=1:length(alpha)
             
             i=i+1;
         end
-        fprintf('sampled %u nodes\n',length(nodes));
+        fprintf('sampled %u nodes\n',i-1);
     end
 end
 
