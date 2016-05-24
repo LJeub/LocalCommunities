@@ -1,5 +1,4 @@
 function [p,not_converged,r]=APPR(alpha,epsilon,s,A,d)
-
 % [p,not_converged,r]=APPR(alpha,epsilon,s,A,d)
 %
 % APPR: computes the personalized PageRank vector
@@ -32,5 +31,8 @@ function [p,not_converged,r]=APPR(alpha,epsilon,s,A,d)
 % Author: Lucas G. S. Jeub
 % Email: jeub@maths.ox.ac.uk
 
+% This function should never run if everything is installed correctly
+error(['APPR mex-function not found, make sure to compile the C++ code by '...
+    'running the ''compile_mex'' script'])
 end
 
