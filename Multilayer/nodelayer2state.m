@@ -2,7 +2,7 @@ function state=nodelayer2state(N,nodelayer)
 % convert node-layer indeces to state indeces
 %
 % Input:
-%           N: number of nodes of the network
+%           N: number of physical nodes of the network
 %
 %           nodelayer: nx2 matrix of node-layer indeces or cell array of
 %                      nx2 matrices of node-layer indeces.
