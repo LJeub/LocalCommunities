@@ -99,8 +99,8 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 %
 % see also ACLcut MOVcut normalize_assoc_mat
 
-% Version: 1.02
-% Date: Fri 18 Jul 2014 13:16:55 BST
+% Version: $Format: %h$
+% Date: $Format: %ci$
 % Author: Lucas G. S. Jeub
 % Email: jeub@maths.ox.ac.uk
 
