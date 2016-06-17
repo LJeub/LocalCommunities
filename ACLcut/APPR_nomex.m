@@ -24,9 +24,9 @@ function [p,not_converged,r]=APPR(alpha,epsilon,v,W,d)
 %
 % see also ACLcut
 
-% Version: 1.01
-% Date: Tue 25 Mar 2014 17:22:32 GMT
-% Author: Lucas G. S. Jeub
+% Version: 2.0-beta
+% Date: Fri 17 Jun 2016 17:33:45 BST
+% Author: Lucas Jeub
 % Email: jeub@maths.ox.ac.uk
 
 maxiter=10^6;
