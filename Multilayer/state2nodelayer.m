@@ -10,6 +10,11 @@ function nodelayer=state2nodelayer(N,state)
 % Output:
 %           nodelayer: matrix of node-layer indeces
 
+% Version: 1.02
+% Date: Fri 18 Jul 2014 13:16:55 BST
+% Author: Lucas G. S. Jeub
+% Email: jeub@maths.ox.ac.uk
+
 if iscell(state)
     nodelayer=cell(size(state));
     for st=1:numel(state)

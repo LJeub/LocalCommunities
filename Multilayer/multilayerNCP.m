@@ -66,6 +66,11 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 %               community. (The association matrix counts only the best
 %               community for a seed node and choice of parameter values)
 
+% Version: 1.02
+% Date: Fri 18 Jul 2014 13:16:55 BST
+% Author: Lucas G. S. Jeub
+% Email: jeub@maths.ox.ac.uk
+
 options=OptionStruct('walktype','classical','layercoupling',1,'teleportation',0,'physicalnodes',false);
 NCPoptions=OptionStruct('nodes',length(A)*length(A{1}),'local',[],'alpha',[],'truncation',[],...
     'viscount',10,'aggressive',true,'transitionmatrix',false,'stationarydistribution',[],'teleportation',[]);

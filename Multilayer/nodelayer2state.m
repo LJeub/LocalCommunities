@@ -12,6 +12,11 @@ function state=nodelayer2state(N,nodelayer)
 %
 % Note: if input is a vector, the function returns the input unchanged.
 
+% Version: 1.02
+% Date: Fri 18 Jul 2014 13:16:55 BST
+% Author: Lucas G. S. Jeub
+% Email: jeub@maths.ox.ac.uk
+
 if iscell(nodelayer)
     state=cell(size(nodelayer));
     for nl=1:numel(nodelayer)
