@@ -1,13 +1,15 @@
 function [conductance,support,connected]=sweep_cut(p,W,d,max_vol)
-% [conductance,support,connected]=sweep_cut(p,W,d,max_vol)
+% Computes a sweep cut
 % 
-% sweep_cut: computes a sweep cut for ranking vector p and adjacency matrix W with
-% node strengths d. Optionally specify max_vol to restrict the maximum
-% volume of sweep sets.
+% Inputs:
+%   p: ranking vector
+%   W: adjacency matrix
+%   d: node strengths
+%   max_vol: optional, specify to restrict the maximum volume of sweep sets.
 %
-% The support is taken over positive values of p unless max_vol is
-% specified, in which case support is taken over all nodes
-%
+% The support for the sweep cut is taken over positive values of p unless p
+% has negative elements, in which case support is taken over all nodes.
+
 % Outputs:
 %
 %   conductance: vector of conductance values for each sweep set

@@ -1,4 +1,4 @@
-function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_mat]=multilayerNCP(A,cut_function,varargin)
+function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_mat]=MultilayerNCP(A,cut_function,varargin)
 % Convenience wrapper around NCP for multiplex networks
 %
 % 

@@ -1,11 +1,9 @@
 function [p,not_converged,r]=APPR(alpha,epsilon,s,A,d)
-% [p,not_converged,r]=APPR(alpha,epsilon,s,A,d)
-%
-% APPR: computes the personalized PageRank vector
+% Compute a personalized PageRank vector
 % 
 % Implements the ApproximatePR algorithm from:
 %   Andersen, R., Chung, F. R. K., & Lang, K. J. (2006).
-%   Local Graph Partitioning using PageRank Vectors (pp. 475?486).
+%   Local Graph Partitioning using PageRank Vectors (pp. 475-486).
 %   FOCS'06
 %
 % Input:
@@ -33,6 +31,6 @@ function [p,not_converged,r]=APPR(alpha,epsilon,s,A,d)
 
 % This function should never run if everything is installed correctly
 error(['APPR mex-function not found, make sure to compile the C++ code by '...
-    'running the ''compile_mex'' script'])
+    'running the ''compile_APPR_mex'' script'])
 end
 

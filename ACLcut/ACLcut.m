@@ -1,8 +1,8 @@
 function [support, conductance, flag, connected]=ACLcut(W,d,seed,alpha,epsilon,max_vol)
-% [support,conductance,volume]=ACLcut(W,d,seed,alpha,epsilon)
+% ACLcut local truncated PageRank method
 %
-% ACLcut: implements the ACLcut truncated pagerank diffusion method to find small
-%   conductance cuts around a seed vertex
+% Implements the ACLcut truncated pagerank diffusion method to find 
+% cuts with small conductance values around a seed vertex.
 %   
 % Inputs:
 %   
@@ -20,6 +20,13 @@ function [support, conductance, flag, connected]=ACLcut(W,d,seed,alpha,epsilon,m
 %   flag: convergence flag (false if APPR vector calculation has not
 %       converged after 10^6 iterations)
 %   connected: identifies connected sweep sets
+%
+% Reference:
+%
+%   Andersen, R., Chung, F. R. K., & Lang, K. J. (2006). 
+%   Local Graph Partitioning using PageRank Vectors . 
+%   Proceedings of the 47th Annual Symposium on Foundations of Computer Science, 
+%   IEEE (pp. 475?486). http://doi.org/10.1109/FOCS.2006.44
 %
 % see also APPR sweep_cut NCP MOVcut
 
@@ -45,17 +52,15 @@ end
 
 
 %compute approximate pagerank vector for seed
-%[p,flag]=APPR_nomex(alpha,epsilon,seed,W,d);
 r=zeros(size(d));
 r(seed)=1/length(seed);
 [p,flag]=APPR(alpha,epsilon,r,W,d);
 
 %Compute normalized sweep vector
-p=div_0(p(:),d(:));
+p(p>0)=p(p>0)./d(p>0);
 
 %compute conductance for sweep sets
 [conductance,support,connected]=sweep_cut(p,W,d,max_vol);
-
 
 end
 

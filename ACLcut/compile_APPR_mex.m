@@ -1,4 +1,4 @@
-function compile_mex
+function compile_APPR_mex
 % Compile APPR mex function
 
 % different options for 32bit and 64bit Matlab
