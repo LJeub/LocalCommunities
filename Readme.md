@@ -29,6 +29,8 @@ More detailed documentation of the different functions is available using `help 
 
 To use the code, make sure that the ‘LocalCommunities’ folder and its subfolders are on your MATLAB path. Next, compile the `APPR` mex function by running `compile_APPR_mex` in the ‘ACLcut’ folder.
 
+Some functions require the ‘matlab_bgl’ library which is available from http://www.mathworks.co.uk/matlabcentral/fileexchange/10922-matlabbgl
+
 ## License and Citation
 
 This code is licensed under a FreeBSD license (see License.txt), except

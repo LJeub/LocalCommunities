@@ -19,8 +19,8 @@ function [lambda_2,V]=laplace_eig(A,tol,maxiter)
 %
 % see also lobpcg
 
-% Version: 2.0-beta
-% Date: Fri 17 Jun 2016 17:33:45 BST
+% Version: 2.0
+% Date: Mon 25 Jul 2016 17:06:57 BST
 % Author: Lucas Jeub
 % Email: jeub@maths.ox.ac.uk
 

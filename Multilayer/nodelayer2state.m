@@ -12,8 +12,8 @@ function state=nodelayer2state(N,nodelayer)
 %
 % Note: if input is a vector, the function returns the input unchanged.
 
-% Version: 2.0-beta
-% Date: Fri 17 Jun 2016 17:33:45 BST
+% Version: 2.0
+% Date: Mon 25 Jul 2016 17:06:57 BST
 % Author: Lucas Jeub
 % Email: jeub@maths.ox.ac.uk
 
