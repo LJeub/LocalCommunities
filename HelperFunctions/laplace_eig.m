@@ -1,8 +1,5 @@
 function [lambda_2,V]=laplace_eig(A,tol,maxiter)
-% [lambda_2,V]=laplace_eig(A,tol,maxiter)
-%
-% laplace_eig: compute second-smallest eigenvalue and corresponding
-%       eigenvector of normalized Laplacian matrix
+% Compute second-smallest eigenvalue and corresponding eigenvector of normalized Laplacian matrix
 %
 % Inputs: 
 %   A: adjacency matrix

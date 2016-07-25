@@ -1,8 +1,6 @@
 function [support, conductance, flag, connected]=MOVcut(W,d,seed,gamma,c)
-% [support, conductance, flag, connected]=MOVcut(W,d,seed,gamma,c)
-%
-% MOVcut: implements the MOVcut locally biased spectral optimisation to find low
-% conductance cuts around a seed vertex, see:
+% Implements the MOVcut locally biased spectral optimisation
+% to find low conductance cuts around a seed vertex, see:
 %   Mahoney, M. W., Orecchia, L., & Vishnoi, N. K. (2012). 
 %   A local spectral method for graphs: With applications to improving graph
 %       partitions and exploring data graphs locally. JMLR, 13, 2339?2365.

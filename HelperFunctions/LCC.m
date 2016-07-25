@@ -1,7 +1,5 @@
 function [ A_c,ind] = LCC(A )
-%[A_c,ind]=LCC(A)
-%
-% LCC: find the largest weakly connected component of a network
+% Find the largest weakly connected component of a network
 %
 %   Input:
 %       A: adjacency matrix

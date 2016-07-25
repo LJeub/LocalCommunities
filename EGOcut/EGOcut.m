@@ -1,8 +1,5 @@
 function [support,conductance,flag,sweep_set]=EGOcut(W,d,seed,~,~,max_vol)
-% [support,conductance,flag,sweep_set]=EGOcut(W,d,seed,~,~)
-%
-% EGOcut: computes sweep cuts based on ranking nodes by geodesic 
-%   distance from a seed node.
+% Compute sweep cuts based on ranking nodes by geodesic distance from a seed node.
 %
 % Inputs: 
 %

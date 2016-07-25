@@ -1,8 +1,5 @@
 function [S,cond]=global_cut(A)
-%[S,cond]=global_cut(A)
-%
-% global_cut: approximate the globally minimal conductance
-%   cut
+% approximate the global minimal conductance cut
 %
 % Input:
 %   A: adjacency matrix

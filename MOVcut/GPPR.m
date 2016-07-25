@@ -1,7 +1,5 @@
 function [p,flag]=GPPR(gamma,s,W,d)
-% [p,flag]=GPPR(gamma,s,W)
-%
-% GPPR: compute a Generalized Personalized Page Rank vector
+% Compute a Generalized Personalized Page Rank vector
 %
 % Inputs:
 %
