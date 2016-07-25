@@ -27,7 +27,7 @@ More detailed documentation of the different functions is available using `help 
 
 ## Installation
 
-To use the code, make sure that the ‘LocalCommunities’ folder and its subfolders are on your MATLAB path. Next, compile the `APPR` mex function by running `compile_APPR_mex`.
+To use the code, make sure that the ‘LocalCommunities’ folder and its subfolders are on your MATLAB path. Next, compile the `APPR` mex function by running `compile_APPR_mex` in the ‘ACLcut’ folder.
 
 ## License and Citation
 
