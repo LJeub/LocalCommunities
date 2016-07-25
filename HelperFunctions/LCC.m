@@ -20,11 +20,12 @@ function [ A_c,ind] = LCC(A )
 % Email: jeub@maths.ox.ac.uk
 
 if iscell(A)
-    At=make_total(A);
+    At=AggregateNetwork(A);
     [C,sizes]=components(max(At,At'));
     [~,k]=max(sizes);
     ind=find(C==k);
-    for i=1:length(A)
+    A_c=cell(size(A));
+    for i=1:numel(A)
         A_c{i}=A{i}(ind,ind);
     end
 else
