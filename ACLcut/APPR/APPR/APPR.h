@@ -5,8 +5,8 @@
 //      in Proceedings of the 47th Annual Symposium on Foundations of Computer
 //      Science, IEEE. http://doi.org/10.1109/FOCS.2006.44
 //
-// Version: 2.0-beta
-// Date: Fri 17 Jun 2016 17:33:45 BST
+// Version: 2.0
+// Date: Mon 25 Jul 2016 17:06:57 BST
 // Author: Lucas Jeub
 // Email: jeub@maths.ox.ac.uk
 
