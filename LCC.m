@@ -16,9 +16,9 @@ function [ A_c,ind] = LCC(A )
 %
 % see also components
 
-% Version: 1.02
-% Date: Fri 18 Jul 2014 13:16:55 BST
-% Author: Lucas G. S. Jeub
+% Version: 2.0-beta
+% Date: Fri 17 Jun 2016 17:33:45 BST
+% Author: Lucas Jeub
 % Email: jeub@maths.ox.ac.uk
 
 if iscell(A)

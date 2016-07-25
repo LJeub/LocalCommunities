@@ -1,16 +1,14 @@
-//
-//  APPR.cpp
-//  APPR
-//
-//  Created by Lucas Jeub on 29/01/2015.
-//
-//
 // Approximate Personalised PageRank computation using the algorithm from:
 //
 //      Andersen, R., Chung, F. R. K., & Lang, K. J. (2006).
 //      Local Graph Partitioning using PageRank Vectors (pp. 475–486).
 //      in Proceedings of the 47th Annual Symposium on Foundations of Computer
 //      Science, IEEE. http://doi.org/10.1109/FOCS.2006.44
+//
+// Version: 2.0-beta
+// Date: Fri 17 Jun 2016 17:33:45 BST
+// Author: Lucas Jeub
+// Email: jeub@maths.ox.ac.uk
 
 #include "APPR.h"
 

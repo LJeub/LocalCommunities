@@ -1,9 +1,9 @@
 function [ p,r] = push_n( p,r,u,alpha,W,d,n )
 %PUSH_N apply push n times at once
 
-% Version: 1.02
-% Date: Fri 18 Jul 2014 13:16:55 BST
-% Author: Lucas G. S. Jeub
+% Version: 2.0-beta
+% Date: Fri 17 Jun 2016 17:33:45 BST
+% Author: Lucas Jeub
 % Email: jeub@maths.ox.ac.uk
 
 mult=(1-((1-alpha)/2).^n)/(1-(1-alpha)/2);
