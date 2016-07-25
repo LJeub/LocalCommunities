@@ -153,21 +153,19 @@ end
 if ~options.isset('stationarydistribution')
     if ~isequal(W,W')
         d=page_rank(P,options.teleportation,sum(W,2));
+        [row,col,val]=find(P);
+        d=d.*vol;
+        W=sparse(row,col,val.*d(col),size(P,1),size(P,2));
     else
         d=sum(W,2);
-        d=d/sum(d);
     end
 else
     d=options.stationarydistribution(:);
+    [row,col,val]=find(P);
+    d=d.*vol;
+    W=sparse(row,col,val.*d(col),size(P,1),size(P,2));
 end
 
-%renormalized network
-%if options.transitionmatrix
-%W=P.*repmat(d(:)',size(W,1),1);
-%end
-[row,col,val]=find(P);
-d=d.*vol;
-W=sparse(row,col,val.*d(col),size(P,1),size(P,2));
 
 if options.isset('local')
     local=options.local;
