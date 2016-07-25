@@ -65,6 +65,8 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 %               nodes i and j have appeared together in a sampled
 %               community. (The association matrix counts only the best
 %               community for a seed node and choice of parameter values)
+%
+% see also NCP nodelayer2state state2nodelayer
 
 % Version: 2.0-beta
 % Date: Fri 17 Jun 2016 17:33:45 BST

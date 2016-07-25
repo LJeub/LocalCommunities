@@ -9,6 +9,8 @@ function [S,cond]=global_cut(A)
 %       indicating which part of the partition the corresponding
 %       node belongs to)
 %   cond: the conductance value of the bipartition
+%
+% see also InternalConductance
 
 % Version: 2.0-beta
 % Date: Fri 17 Jun 2016 17:33:45 BST

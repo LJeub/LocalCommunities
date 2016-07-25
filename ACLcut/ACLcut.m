@@ -28,7 +28,7 @@ function [support, conductance, flag, connected]=ACLcut(W,d,seed,alpha,epsilon,m
 %   Proceedings of the 47th Annual Symposium on Foundations of Computer Science, 
 %   IEEE (pp. 475?486). http://doi.org/10.1109/FOCS.2006.44
 %
-% see also APPR sweep_cut NCP MOVcut
+% see also NCP sweep_cut APPR
 
 % Version: 2.0-beta
 % Date: Fri 17 Jun 2016 17:33:45 BST

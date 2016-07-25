@@ -15,6 +15,8 @@ function [support,conductance,flag,sweep_set]=EGOcut(W,d,seed,~,~,max_vol)
 %   sweep_set: identifies sets that correspond to sweep sets, i.e.,
 %       where all nodes with egorank equal to the minimum in the 
 %       community have been included.
+%
+% see also NCP sweep_cut
 
 % Version: 2.0-beta
 % Date: Fri 17 Jun 2016 17:33:45 BST

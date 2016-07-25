@@ -96,7 +96,7 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 % One can then plot the NCP using
 %   loglog(conductance)
 %
-% see also ACLcut MOVcut NormalizeAssociationMatrix
+% see also ACLcut EGOcut MOVcut NormalizeAssociationMatrix
 
 % Version: 2.0-beta
 % Date: Fri 17 Jun 2016 17:33:45 BST

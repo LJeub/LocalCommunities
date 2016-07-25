@@ -21,7 +21,7 @@ function [support, conductance, flag, connected]=MOVcut(W,d,seed,gamma,c)
 %   flag: convergence flag
 %   connected: identifies connected sweep sets
 %
-% see also GPPR sweep_cut NCP ACLcut
+% see also NCP sweep_cut GPPR
 
 % Version: 2.0-beta
 % Date: Fri 17 Jun 2016 17:33:45 BST

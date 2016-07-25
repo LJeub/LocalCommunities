@@ -7,9 +7,6 @@ function [conductance,support,connected]=sweep_cut(p,W,d,max_vol)
 %   d: node strengths
 %   max_vol: optional, specify to restrict the maximum volume of sweep sets.
 %
-% The support for the sweep cut is taken over positive values of p unless p
-% has negative elements, in which case support is taken over all nodes.
-
 % Outputs:
 %
 %   conductance: vector of conductance values for each sweep set
@@ -17,6 +14,9 @@ function [conductance,support,connected]=sweep_cut(p,W,d,max_vol)
 %       by support(1:k) has conductance given by conductance(k)
 %   connected: logical vector with elements indicating whether the subgraph
 %       induced by the corresponding sweep set is connected
+%
+% The support for the sweep cut is taken over positive values of p unless p
+% has negative elements, in which case support is taken over all nodes.
 %
 % see also ACLcut MOVcut EGOcut global_cut
 

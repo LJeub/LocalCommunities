@@ -22,4 +22,4 @@
 %   InternalConductance         - Compute internal conductance of communities
 %   NormalizeAssociationMatrix  - Normalize an association matrix returned by NCP
 %
-% See also ACLcut
+% See also ACLcut EGOcut MOVcut HelperFunctions Multilayer

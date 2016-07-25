@@ -12,6 +12,8 @@ function [int_cond]=InternalConductance(W,S)
 %           int_cond: array of internal conductance values for the
 %               communities. Internal conductance of empty communities is
 %               is coded nan.
+%
+% see also NCP global_cut
 
 % Version: 2.0-beta
 % Date: Fri 17 Jun 2016 17:33:45 BST
