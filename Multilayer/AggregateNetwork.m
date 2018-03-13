@@ -1,4 +1,4 @@
-function [ AT ] = make_total( A)
+function [ AT ] = AggregateNetwork(A)
 % Aggregates multilayer network by summing over all layers
 
 T=length(A);
