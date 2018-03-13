@@ -14,7 +14,7 @@ This code implements the local community detection methods used in
 
 ## Usage
 
-The main interface is the `NCP` function which computes local and global NCPs using the `ACLcut`, `MOVcut`, or `EGOcut` methods described in [1]. For multilayer networks `Multilayer/multilayerNCP` provides a convenience wrapper around `NCP` that sets up `NCP` with appropriate options for the ‘classical’ or ‘relaxed’ random walk and allows for sampling using either ‘physical’ or ‘state’ nodes.
+The main interface is the `NCP` function which computes local and global NCPs using the `ACLcut`, `MOVcut`, or `EGOcut` methods described in [1]. For multilayer networks `MultilayerNCP` provides a convenience wrapper around `NCP` that sets up `NCP` with appropriate options for the ‘classical’ or ‘relaxed’ random walk and allows for sampling using either ‘physical’ or ‘state’ nodes.
 
 To create a conductance ratio profile (CRP), first compute the network community profile using the `NCP` function, storing both the conductance values and communities. Then compute the internal conductance for these communities using the `InternalConductance` function. One then obtains the conductance ratio profile by dividing the NCP by the internal conductance, e.g.
 
