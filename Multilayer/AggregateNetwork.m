@@ -1,5 +1,10 @@
 function [ AT ] = AggregateNetwork(A)
-% Aggregates multilayer network by summing over all layers
+% AggregateNetwork Aggregates multilayer network by summing over all layers
+
+% Version: 2.0
+% Date: Mon 25 Jul 2016 17:06:57 BST
+% Author: Lucas Jeub
+% Email: jeub@maths.ox.ac.uk
 
 T=length(A);
 AT=A{1};

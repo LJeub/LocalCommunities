@@ -1,4 +1,26 @@
 function [AS,id,layer]=supra_adjacency(A,omega)
+% supra_adjacency Convert multilayer network to supra-adjacency matrix
+%
+% Input:
+%
+%   A: cell array of adjacency matrices for each layer
+%
+%   omega: weight of interlayer edges
+%
+% Output:
+%
+%   AS: supra-adjacency matrix with interlayer edges of weight omega with
+%       all-to-all (multiplex) coupling
+%
+%   id: vector of node ids for state nodes that are present (i.e. have
+%       connections)
+%
+%   layer: vector of layer ids for state nodes that are present
+
+% Version: 2.0
+% Date: Mon 25 Jul 2016 17:06:57 BST
+% Author: Lucas Jeub
+% Email: jeub@maths.ox.ac.uk
 N=size(A{1},1);
 T=length(A);
 

@@ -1,5 +1,23 @@
 function [P,id,layer]=relax_rate_walk(A)
+% relax_rate_walk compute relax-rate walk matrices
+%
+% Input: 
+%
+%   A: cell array of adjacency matrices for each layer
+%
+% Output: 
+%
+%   P: function that returns relax-rate-walk matrix given relax rate as
+%      input
+%
+%   id: vector of node ids
+%
+%   layer: vector of layer ids   
 
+% Version: 2.0
+% Date: Mon 25 Jul 2016 17:06:57 BST
+% Author: Lucas Jeub
+% Email: jeub@maths.ox.ac.uk
 l_width=size(A{1},1);
 n_l=length(A);
 id=zeros(l_width*n_l,1);
