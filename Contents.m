@@ -9,8 +9,8 @@
 %
 % 2. Jeub, L. G. S., Mahoney, M. W., Mucha, P. J., & Porter, M. A. (2015). 
 %    A Local Perspective on Community Structure in Multilayer Networks. 
-%    arXiv:1510.05185 [cs.SI].
-%    http://arxiv.org/abs/1510.05185
+%    Network Science 5(2),  144-163
+%    https://doi.org/10.1017/nws.2016.22
 %
 % Main Interface
 %
