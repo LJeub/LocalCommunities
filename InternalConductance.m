@@ -15,10 +15,10 @@ function [int_cond]=InternalConductance(W,S)
 %
 % see also NCP global_cut
 
-% Version: 2.0
-% Date: Mon 25 Jul 2016 17:06:57 BST
+% Version: 2.0.1
+% Date: Tue 13 Mar 2018 15:46:52 CET
 % Author: Lucas Jeub
-% Email: jeub@maths.ox.ac.uk
+% Email: ljeub@iu.edu
 
 
 

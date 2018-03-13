@@ -13,10 +13,10 @@ function assoc_mat=NormalizeAssociationMatrix(assoc_mat)
 %
 % see also NCP
 
-% Version: 2.0
-% Date: Mon 25 Jul 2016 17:06:57 BST
+% Version: 2.0.1
+% Date: Tue 13 Mar 2018 15:46:52 CET
 % Author: Lucas Jeub
-% Email: jeub@maths.ox.ac.uk
+% Email: ljeub@iu.edu
 
 n=length(assoc_mat);
 norm=repmat(diag(assoc_mat),1,n)+repmat(diag(assoc_mat)',n,1)-assoc_mat;

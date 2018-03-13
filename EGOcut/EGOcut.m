@@ -18,10 +18,10 @@ function [support,conductance,flag,sweep_set]=EGOcut(W,d,seed,~,~,max_vol)
 %
 % see also NCP sweep_cut
 
-% Version: 2.0
-% Date: Mon 25 Jul 2016 17:06:57 BST
+% Version: 2.0.1
+% Date: Tue 13 Mar 2018 15:46:51 CET
 % Author: Lucas Jeub
-% Email: jeub@maths.ox.ac.uk
+% Email: ljeub@iu.edu
 
 % up to half the volume of the network by default
 if nargin<6
