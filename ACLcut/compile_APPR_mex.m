@@ -15,16 +15,16 @@ end
 
 % set up input files
 location=fileparts(mfilename('fullpath'));
-includes=['-I',location,'/ACLcut/APPR/matlab_matrix'];
-compiles=strcat(location,'/ACLcut/APPR/',{'APPR/APPR','matlab_matrix/full','matlab_matrix/sparse'},'.cpp');
+includes=['-I',location,'/APPR/matlab_matrix'];
+compiles=strcat(location,'/APPR/',{'APPR/APPR','matlab_matrix/full','matlab_matrix/sparse'},'.cpp');
 product=['/APPR.',ext];
 
 % compile 
 mex(includes,arraydims,compiles{:});
 
 % move product to correct location
-if ~strcmp(pwd,[location,'/ACLcut'])
-    movefile([pwd,product],[location,'/ACLcut',product]);
+if ~strcmp(pwd,location)
+    movefile([pwd,product],[location,product]);
 end
 
 end
