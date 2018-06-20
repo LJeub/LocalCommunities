@@ -115,6 +115,10 @@ W=sparse(W);
 N=options.nodes;
 aggressive=options.aggressive;
 
+if nargout>4
+    assoc_mat=zeros(length(W));
+end
+
 if ~options.isset('stationarydistribution')
     % check W is connected
     [WC,original_node_index]=LCC(W);
@@ -244,9 +248,7 @@ end
 if nargout>3
     communities_dis=cell(length(W)-1,1);
 end
-if nargout>4
-    assoc_mat=zeros(length(W));
-end
+
 
 for j=1:length(alpha)
     for k=1:length(truncation)
@@ -292,7 +294,8 @@ for j=1:length(alpha)
             
             if nargout>4
                 if ~isempty(supp)
-                    assoc_mat(supp(1:mk),supp(1:mk))=assoc_mat(supp(1:mk),supp(1:mk))+1;
+                    assoc_mat(original_node_index(supp(1:mk)),original_node_index(supp(1:mk)))=...
+                        assoc_mat(original_node_index(supp(1:mk)),original_node_index(supp(1:mk)))+1;
                 end
             end
             
