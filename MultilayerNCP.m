@@ -112,7 +112,8 @@ switch options.walktype
         A=supra_adjacency(A,options.layercoupling);
         kin=sum(A,2);
         kout=sum(A,1);
-        A=A*diag(kout.^-1);
+        [row,col,val]=find(A);
+        A=sparse(row,col,val./kout(col)',size(A,1),size(A,2));
         p=page_rank(A,options.teleportation,kin);
         if any(kin==0)
             if max(p(kin==0))<10^-10
