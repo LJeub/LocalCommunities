@@ -19,7 +19,7 @@ else
 end
 
 if alpha==0
-    [p,~]=eigs(P,1);
+    [p,~]=eigs(P,1,'la');
 else
     p=bicgstab((speye(length(P))+(alpha-1)*P),alpha*s,[],100);
 end
