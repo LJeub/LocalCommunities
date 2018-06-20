@@ -5,10 +5,10 @@
 //      in Proceedings of the 47th Annual Symposium on Foundations of Computer
 //      Science, IEEE. http://doi.org/10.1109/FOCS.2006.44
 //
-// Version: 2.0.1
-// Date: Tue 13 Mar 2018 15:46:51 CET
+// Version: 2.0.2
+// Date: Wed 20 Jun 2018 16:01:01 CEST
 // Author: Lucas Jeub
-// Email: ljeub@iu.edu
+// Email: lucasjeub@gmail.com
 
 #ifndef __APPR__main__
 #define __APPR__main__

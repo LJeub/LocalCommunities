@@ -35,10 +35,10 @@ classdef OptionStruct < matlab.mixin.Copyable
     %
     % properties: options: used to get a list of options
     
-% Version: 2.0.1
-% Date: Tue 13 Mar 2018 15:46:52 CET
+% Version: 2.0.2
+% Date: Wed 20 Jun 2018 16:01:02 CEST
 % Author: Lucas Jeub
-% Email: ljeub@iu.edu
+% Email: lucasjeub@gmail.com
     
     properties (Hidden)
         option_struct=struct([]);

@@ -68,10 +68,10 @@ function [conductance_con,communities_con,conductance_dis,communities_dis,assoc_
 %
 % see also NCP nodelayer2state state2nodelayer
 
-% Version: 2.0.1
-% Date: Tue 13 Mar 2018 15:46:52 CET
+% Version: 2.0.2
+% Date: Wed 20 Jun 2018 16:01:02 CEST
 % Author: Lucas Jeub
-% Email: ljeub@iu.edu
+% Email: lucasjeub@gmail.com
 
 options=OptionStruct('walktype','classical','layercoupling',1,'teleportation',0,'physicalnodes',false);
 NCPoptions=OptionStruct('nodes',length(A)*length(A{1}),'local',[],'alpha',[],'truncation',[],...

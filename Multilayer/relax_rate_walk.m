@@ -14,10 +14,10 @@ function [P,id,layer]=relax_rate_walk(A)
 %
 %   layer: vector of layer ids   
 
-% Version: 2.0.1
-% Date: Tue 13 Mar 2018 15:46:52 CET
+% Version: 2.0.2
+% Date: Wed 20 Jun 2018 16:01:02 CEST
 % Author: Lucas Jeub
-% Email: ljeub@iu.edu
+% Email: lucasjeub@gmail.com
 l_width=size(A{1},1);
 n_l=length(A);
 id=zeros(l_width*n_l,1);

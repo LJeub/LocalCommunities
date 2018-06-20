@@ -24,10 +24,10 @@ function [p,not_converged,r]=APPR(alpha,epsilon,s,A,d)
 %
 % Implemented as a mex function
 
-% Version: 2.0.1
-% Date: Tue 13 Mar 2018 15:46:51 CET
+% Version: 2.0.2
+% Date: Wed 20 Jun 2018 16:01:01 CEST
 % Author: Lucas Jeub
-% Email: ljeub@iu.edu
+% Email: lucasjeub@gmail.com
 
 % This function should never run if everything is installed correctly
 error(['APPR mex-function not found, make sure to compile the C++ code by '...
